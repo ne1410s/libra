@@ -1,12 +1,13 @@
-import { EntityRecord } from 'app/shared/entity-record';
+import { EntityRecord } from 'app/shared/model/entity-record';
 import { Exercise } from './exercise';
 
 export class ExerciseRecord extends EntityRecord<Exercise> {
 
     constructor(
             public exercise: Exercise,
-            public minutes: number) {
+            public minutes: number,
+            recorded?: Date) {
 
-        super(exercise);
+        super(exercise, recorded);
     }
 }

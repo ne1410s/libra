@@ -1,10 +1,10 @@
-import { DateRecord } from 'app/shared/date-record';
+import { DateRecord } from 'app/shared/model/date-record';
 
 export class MassRecord extends DateRecord {
 
     constructor(
             public kilos: number,
-            recorded = new Date()) {
+            recorded?: Date) {
 
         super(recorded);
     }

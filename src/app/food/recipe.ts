@@ -1,4 +1,4 @@
-import { Record } from 'app/shared/record';
+import { Record } from 'app/shared/model/record';
 
 export class Recipe extends Record {
 

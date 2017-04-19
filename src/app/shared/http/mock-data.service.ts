@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { InMemoryDbService } from 'angular-in-memory-web-api';
 
-import { Record } from 'app/shared/record';
+import { Record } from 'app/shared/model/record';
 import { FoodItem } from 'app/food/food-item';
 import { FoodRecord } from 'app/food/food-record';
 import { Exercise } from 'app/exercise/exercise';

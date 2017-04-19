@@ -5,7 +5,7 @@ export abstract class EntityRecord<T extends Record> extends DateRecord {
 
     constructor(
             readonly entity: T,
-            recorded = new Date()) {
+            recorded?: Date) {
 
         super(recorded);
     }
