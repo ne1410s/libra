@@ -1,0 +1,18 @@
+<p>
+  chart works!
+</p>
+
+<p>Exercises: {{ (exercises | async)?.length }}</p>
+<div *ngFor="let exercise of exercises | async">
+  <p>{{ exercise.name }} @ {{ exercise.burnRate }} cal/hr</p>
+</div>
+
+<p>Exercise Records: {{ (exerciseRecords | async)?.length }}</p>
+<div *ngFor="let exerciseRecord of exerciseRecords | async">
+  <p>{{ exerciseRecord.recorded }}</p>
+</div>
+
+<p>Food Items: {{ (foodItems | async)?.length }}</p>
+<div *ngFor="let foodItem of foodItems | async">
+  <p>{{ foodItem.name }} @ {{ foodItem.specificCalories }} cal/g</p>
+</div>
