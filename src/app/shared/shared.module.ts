@@ -6,6 +6,7 @@ import { NotFoundComponent } from './not-found/not-found.component';
 import { ChartComponent } from './chart/chart.component';
 import { MockHttpModule } from './http/mock-http.module';
 import { QueryStringService } from './http/query-string.service';
+import { DateRangePickerComponent } from './date-range-picker/date-range-picker.component';
 
 const USE_MOCK_HTTP = true;
 
@@ -16,11 +17,13 @@ const USE_MOCK_HTTP = true;
   ],
   declarations: [
     NotFoundComponent,
-    ChartComponent
+    ChartComponent,
+    DateRangePickerComponent
   ],
   exports: [
     NotFoundComponent,
-    ChartComponent
+    ChartComponent,
+    DateRangePickerComponent
   ],
   providers: [
     QueryStringService

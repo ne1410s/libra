@@ -19,8 +19,8 @@ export class MockDataService implements InMemoryDbService {
   createDb() {
 
     const foods: FoodItem[] = [
-      new FoodItem('Cheese', 300),
-      new FoodItem('Beer', 424)
+      new FoodItem('Bread', 300),
+      new FoodItem('Cheese', 424)
     ];
 
     const foodRecords: FoodRecord[] = [
