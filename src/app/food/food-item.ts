@@ -4,10 +4,10 @@ export class FoodItem extends Record {
 
     constructor(
             public name: string,
-            public specificCalories: number,
-            public specificCarbohydrates?: number,
-            public specificFat?: number,
-            public specificProtein?: number) {
+            public calsPerGram: number,
+            public carbsPerGram?: number,
+            public fatPerGram?: number,
+            public proteinPerGram?: number) {
 
         super();
     }

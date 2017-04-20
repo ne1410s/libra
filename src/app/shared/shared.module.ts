@@ -10,6 +10,7 @@ import { ChartComponent } from './chart/chart.component';
 import { MockHttpModule } from './http/mock-http.module';
 import { QueryStringService } from './http/query-string.service';
 import { DateRangePickerComponent } from './date-range-picker/date-range-picker.component';
+import { ChartConfigService } from './chart/chart-config.service';
 
 const USE_MOCK_HTTP = true;
 
@@ -31,7 +32,8 @@ const USE_MOCK_HTTP = true;
     DateRangePickerComponent
   ],
   providers: [
-    QueryStringService
+    QueryStringService,
+    ChartConfigService
   ]
 })
 export class SharedModule { }

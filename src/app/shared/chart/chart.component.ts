@@ -2,14 +2,14 @@ import { Component, OnInit } from '@angular/core';
 
 import { Observable } from 'rxjs/Observable';
 
-import { Period } from 'app/shared/model/date-crud-service.service';
-
+import { DateCrudService, Period } from 'app/shared/model/date-crud-service.service';
 import { ExerciseRecord } from 'app/exercise/exercise-record';
 import { ExerciseRecordService } from 'app/exercise/exercise-record.service';
 import { FoodRecord } from 'app/food/food-record';
 import { FoodRecordService } from 'app/food/food-record.service';
 import { MassRecord } from 'app/mass/mass-record';
 import { MassRecordService } from 'app/mass/mass-record.service';
+import { ChartConfigService } from './chart-config.service';
 
 @Component({
   selector: 'app-chart',
@@ -21,26 +21,21 @@ export class ChartComponent implements OnInit {
   public offset = 0;
   public period = Period.Year;
 
-  public exerciseRecords: Observable<ExerciseRecord[]>;
-  public foodRecords: Observable<FoodRecord[]>;
-  public massRecords: Observable<MassRecord[]>;
+  public outCals: number;
+  public inCals: number;
 
   get periodDescription(): string {
-    return MassRecordService.getPeriodDescription(this.period, this.offset);
+    return DateCrudService.getPeriodDescription(this.period, this.offset);
   }
 
-  chartLabels: Array<any> = ['January', 'February', 'March', 'April', 'May', 'June', 'July'];
-  chartOptions: any = { maintainAspectRatio: false };
-  chartDatasets: Array<any> = [
-    {data: [65, 59, 80, 81, 56, 55, 40], label: 'Series A'},
-    {data: [28, 48, 40, 19, 86, 27, 90], label: 'Series B'},
-    {data: [18, 48, 77, 9, 100, 27, 40], label: 'Series C'},
-  ];
+  chartOptions: any;
+  chartData = [{ data: [] }];
 
   constructor(
       private foodRecordService: FoodRecordService,
       private exerciseRecordService: ExerciseRecordService,
-      private massRecordService: MassRecordService) { }
+      private massRecordService: MassRecordService,
+      private chartConfigService: ChartConfigService) { }
 
   ngOnInit(): void {
     this.applyRangeFilter();
@@ -59,9 +54,29 @@ export class ChartComponent implements OnInit {
 
   /** Entrusts the service with caching, etc. */
   applyRangeFilter(): void {
-    this.exerciseRecords = this.exerciseRecordService.listForPeriod(this.period, this.offset);
-    this.foodRecords = this.foodRecordService.listForPeriod(this.period, this.offset);
-    this.massRecords = this.massRecordService.listForPeriod(this.period, this.offset);
+    this.chartOptions = this.chartConfigService.getOptions(this.periodDescription, this.period, this.offset);
+
+    this.massRecordService
+      .listForPeriod(this.period, this.offset, 1)
+      .subscribe(items => {
+        this.chartData = [{ data: items.map(m => { return { x: m.recorded, y: m.kilos }; }) }];
+      });
+
+    this.exerciseRecordService
+      .listForPeriod(this.period, this.offset)
+      .subscribe(items => {
+        this.outCals = items.reduce((tot, cur) => {
+          return cur.exercise.calsPerHour * cur.minutes / 60;
+        }, 0);
+      });
+
+    this.foodRecordService
+      .listForPeriod(this.period, this.offset)
+      .subscribe(items => {
+        this.inCals = items.reduce((tot, cur) => {
+          return cur.foodItem.calsPerGram * cur.grams;
+        }, 0);
+      });
   }
 
   chartClicked(e: any): void {

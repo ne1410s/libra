@@ -16,14 +16,14 @@ export abstract class DateCrudService<T extends DateRecord> extends CrudService<
 
   private allRecordsCache: Observable<T[]>;
 
-  public static getDates(period: Period, offset: number): [Date, Date] {
+  public static getDates(period: Period, offset: number, tolerance = 0): [Date, Date] {
     switch (period) {
       case Period.Week:
-        return DateCrudService.weekRange(offset);
+        return DateCrudService.weekRange(offset, tolerance);
       case Period.Month:
-        return DateCrudService.monthRange(offset);
+        return DateCrudService.monthRange(offset, tolerance);
       case Period.Year:
-        return DateCrudService.yearRange(offset);
+        return DateCrudService.yearRange(offset, tolerance);
     }
   }
 
@@ -39,27 +39,27 @@ export abstract class DateCrudService<T extends DateRecord> extends CrudService<
     }
   }
 
-  public static weekRange(offset = 0): [Date, Date] {
+  public static weekRange(offset = 0, tolerance = 0): [Date, Date] {
     const now = new Date();
     const weekStart = 1 + now.getDate() - now.getDay();
-    const start = new Date(now.getFullYear(), now.getMonth(), weekStart + (offset * 7));
-    const end = new Date(now.getFullYear(), now.getMonth(), weekStart + (offset * 7) + 7);
+    const start = new Date(now.getFullYear(), now.getMonth(), weekStart + ((offset - tolerance) * 7));
+    const end = new Date(now.getFullYear(), now.getMonth(), weekStart + ((offset + tolerance) * 7) + 7);
     return [start, end];
   }
 
-  public static monthRange(offset = 0): [Date, Date] {
+  public static monthRange(offset = 0, tolerance = 0): [Date, Date] {
     const now = new Date();
     const month = now.getMonth();
-    const start = new Date(now.getFullYear(), month + offset);
-    const end = new Date(now.getFullYear(), month + offset + 1);
+    const start = new Date(now.getFullYear(), month + (offset - tolerance));
+    const end = new Date(now.getFullYear(), month + (offset + tolerance) + 1);
     return [start, end];
   }
 
-  public static yearRange(offset = 0): [Date, Date] {
+  public static yearRange(offset = 0, tolerance = 0): [Date, Date] {
     const now = new Date();
     const year = now.getFullYear();
-    const start = new Date(year + offset, 0);
-    const end = new Date(year + offset + 1, 0);
+    const start = new Date(year + (offset - tolerance), 0);
+    const end = new Date(year + (offset + tolerance) + 1, 0);
     return [start, end];
   }
 
@@ -67,13 +67,12 @@ export abstract class DateCrudService<T extends DateRecord> extends CrudService<
     super(http);
   }
 
-  listForPeriod(period: Period, offset: number): Observable<T[]> {
-    const dateRange = DateCrudService.getDates(period, offset);
-    return this.listInRange(dateRange);
+  listForPeriod(period: Period, offset: number, tolerance: number = 0): Observable<T[]> {
+    const dateRange = DateCrudService.getDates(period, offset, tolerance);
+    return this.listForRange(dateRange);
   }
 
-  private listInRange(dateRange: [Date, Date]): Observable<T[]> {
-
+  listForRange(dateRange: [Date, Date]): Observable<T[]> {
     if (!this.allRecordsCache) {
       console.log(`${this.apiEntityPath}: Calling http to update the cache`);
       this.allRecordsCache = this.list();
