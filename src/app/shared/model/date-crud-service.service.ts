@@ -19,22 +19,34 @@ export abstract class DateCrudService<T extends DateRecord> extends CrudService<
   }
 
   listForPeriod(period: Period, offset: number): Observable<T[]> {
-    let dateRange: [Date, Date];
-    switch (period) {
-      case Period.Week:
-        dateRange = this.weekRange(offset);
-        break;
-      case Period.Month:
-        dateRange = this.monthRange(offset);
-        break;
-      case Period.Year:
-        dateRange = this.yearRange(offset);
-        break;
-    }
+    const dateRange = this.getDates(period, offset);
     return this.listInRange(dateRange);
   }
 
-  weekRange(offset = 0): [Date, Date] {
+  getDates(period: Period, offset: number): [Date, Date] {
+    switch (period) {
+      case Period.Week:
+        return this.weekRange(offset);
+      case Period.Month:
+        return this.monthRange(offset);
+      case Period.Year:
+        return this.yearRange(offset);
+    }
+  }
+
+  getPeriodDescription(period: Period, offset: number): string {
+    const start = this.getDates(period, offset)[0];
+    switch (period) {
+      case Period.Week:
+        return `w/c ${start.toDateString().substr(4, 11)}`;
+      case Period.Month:
+        return `${start.toDateString().substr(4, 3)} ${start.getFullYear()}`;
+      case Period.Year:
+        return `${start.getFullYear()}`;
+    }
+  }
+
+  private weekRange(offset = 0): [Date, Date] {
     const now = new Date();
     const weekStart = 1 + now.getDate() - now.getDay();
     const start = new Date(now.getFullYear(), now.getMonth(), weekStart + (offset * 7));
@@ -42,7 +54,7 @@ export abstract class DateCrudService<T extends DateRecord> extends CrudService<
     return [start, end];
   }
 
-  monthRange(offset = 0): [Date, Date] {
+  private monthRange(offset = 0): [Date, Date] {
     const now = new Date();
     const month = now.getMonth();
     const start = new Date(now.getFullYear(), month + offset);
@@ -50,7 +62,7 @@ export abstract class DateCrudService<T extends DateRecord> extends CrudService<
     return [start, end];
   }
 
-  yearRange(offset = 0): [Date, Date] {
+  private yearRange(offset = 0): [Date, Date] {
     const now = new Date();
     const year = now.getFullYear();
     const start = new Date(year + offset, 0);

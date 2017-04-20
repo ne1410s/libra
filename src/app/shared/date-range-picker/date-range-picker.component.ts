@@ -13,13 +13,21 @@ export class DateRangePickerComponent {
   @Output() onOffsetChanged = new EventEmitter<number>();
   @Output() onPeriodChanged = new EventEmitter<Period>();
 
-  offsetChange(event: any) {
-    this.offset = event.target.value;
+  /** The available array of offset values */
+  offsetOptions = Array.from(Array(11), (x, i) => i - 5);
+
+  /** Key value pairs for enumerable */
+  periodOptions = [
+    { key: Period[Period.Week], value: Period.Week },
+    { key: Period[Period.Month], value: Period.Month },
+    { key: Period[Period.Year], value: Period.Year }
+  ];
+
+  offsetChange() {
     this.onOffsetChanged.emit(this.offset);
   }
 
-  periodChange(event: any) {
-    this.period = event.target.value;
+  periodChange() {
     this.onPeriodChanged.emit(this.period);
   }
 }

@@ -1,4 +1,5 @@
 import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { HttpModule } from '@angular/http';
 
@@ -13,12 +14,13 @@ const USE_MOCK_HTTP = true;
 @NgModule({
   imports: [
     CommonModule,
+    FormsModule,
     USE_MOCK_HTTP ? MockHttpModule : HttpModule
   ],
   declarations: [
     NotFoundComponent,
     ChartComponent,
-    DateRangePickerComponent
+    DateRangePickerComponent,
   ],
   exports: [
     NotFoundComponent,

@@ -1,9 +1,14 @@
-
-<div>
-  <p>
-    date-range-picker works!
-  </p>
-
-  <input [value]="offset" (change)="offsetChange($event)" type="number" min="-12" max="12" />
-  <input [value]="period" (change)="periodChange($event)" type="number" min="0" max="2" />
+<div class="controls">
+  <div>
+    <span>Period</span>
+    <select [(ngModel)]="period" (change)="periodChange()">
+      <option *ngFor="let option of periodOptions" [ngValue]="option.value">{{ option.key }}</option>
+    </select>
+  </div>
+  <div>
+    <span>Offset</span>
+    <select [(ngModel)]="offset" (change)="offsetChange()">
+      <option *ngFor="let option of offsetOptions" [ngValue]="option">{{ option }}</option>
+    </select>
+  </div>
 </div>

@@ -1,3 +1,11 @@
-div {
-    border: 1px solid grey;
+.controls {
+    display: flex;
+}
+
+.controls > div {
+    margin: .2em .5em;
+}
+
+span {
+    font-weight: bold;
 }

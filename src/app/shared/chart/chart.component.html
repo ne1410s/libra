@@ -1,6 +1,12 @@
 
-<p>Parent offset is: {{ offset }}</p>
-<p>Parent period is: {{ period }}</p>
+<app-date-range-picker
+    [offset]="offset"
+    [period]="period"
+    (onOffsetChanged)="onOffsetChanged($event)"
+    (onPeriodChanged)="onPeriodChanged($event)">
+</app-date-range-picker>
+
+<h2>{{ periodDescription }}</h2>
 
 <p><b>Exercise Records: {{ (exerciseRecords | async)?.length }}</b></p>
 <div *ngFor="let exerciseRecord of exerciseRecords | async">
@@ -16,10 +22,3 @@
 <div *ngFor="let massRecord of massRecords | async">
   <p>{{ massRecord.recorded }}</p>
 </div>
-
-<app-date-range-picker
-    [offset]="offset"
-    [period]="period"
-    (onOffsetChanged)="onOffsetChanged($event)"
-    (onPeriodChanged)="onPeriodChanged($event)">
-</app-date-range-picker>

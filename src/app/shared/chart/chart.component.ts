@@ -25,22 +25,39 @@ export class ChartComponent implements OnInit {
   public foodRecords: Observable<FoodRecord[]>;
   public massRecords: Observable<MassRecord[]>;
 
+  get periodDescription(): string {
+    return this.massRecordService.getPeriodDescription(this.period, this.offset);
+  }
+
   constructor(
       private foodRecordService: FoodRecordService,
       private exerciseRecordService: ExerciseRecordService,
       private massRecordService: MassRecordService) { }
 
-  ngOnInit() {
+  ngOnInit(): void {
+    this.naiveUpdate();
+  }
+
+  onOffsetChanged(offset: number): void {
+    this.offset = offset;
+    this.naiveUpdate();
+  }
+
+  onPeriodChanged(period: Period): void {
+    this.offset = 0;
+    this.period = period;
+    this.naiveUpdate();
+  }
+
+  /**
+   * @deprecated Unnecessary hit as per current implementation; the lists are retrieved in full with
+   * the below calls anyway, and there is no reason for them not to be cached for filtering. A reset
+   * could be called when a record is added/amended/deleted (for example), but even this could be
+   * managed in the cache.
+   */
+  naiveUpdate(): void {
     this.exerciseRecords = this.exerciseRecordService.listForPeriod(this.period, this.offset);
     this.foodRecords = this.foodRecordService.listForPeriod(this.period, this.offset);
     this.massRecords = this.massRecordService.listForPeriod(this.period, this.offset);
-  }
-
-  onOffsetChanged(offset: number) {
-    this.offset = offset;
-  }
-
-  onPeriodChanged(period: Period) {
-    this.period = period;
   }
 }
