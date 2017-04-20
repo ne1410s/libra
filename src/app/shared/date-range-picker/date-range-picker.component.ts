@@ -13,12 +13,13 @@ export class DateRangePickerComponent {
   @Output() onOffsetChanged = new EventEmitter<number>();
   @Output() onPeriodChanged = new EventEmitter<Period>();
 
-  offsetChange() {
+  offsetChange(event: any) {
+    this.offset = event.target.value;
     this.onOffsetChanged.emit(this.offset);
   }
 
-  periodChange(period: Period) {
-    this.period = period;
-    this.onPeriodChanged.emit(period);
+  periodChange(event: any) {
+    this.period = event.target.value;
+    this.onPeriodChanged.emit(this.period);
   }
 }

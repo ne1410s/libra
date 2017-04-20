@@ -4,6 +4,6 @@
     date-range-picker works!
   </p>
 
-  <input (change)="offsetChange(this.value)" [(value)]="offset" type="number" min="-12" max="12" />
-  <p>Period: {{ period }}</p>
+  <input [value]="offset" (change)="offsetChange($event)" type="number" min="-12" max="12" />
+  <input [value]="period" (change)="periodChange($event)" type="number" min="0" max="2" />
 </div>

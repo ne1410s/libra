@@ -39,4 +39,8 @@ export class ChartComponent implements OnInit {
   onOffsetChanged(offset: number) {
     this.offset = offset;
   }
+
+  onPeriodChanged(period: Period) {
+    this.period = period;
+  }
 }
