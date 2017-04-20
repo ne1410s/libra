@@ -8,6 +8,15 @@
 
 <h2>{{ periodDescription }}</h2>
 
+<div>
+  <canvas baseChart height="400" chartType="line"
+          [datasets]="chartDatasets"
+          [labels]="chartLabels"
+          [options]="chartOptions"
+          (chartClick)="chartClicked($event)">
+  </canvas>
+</div>
+
 <p><b>Exercise Records: {{ (exerciseRecords | async)?.length }}</b></p>
 <div *ngFor="let exerciseRecord of exerciseRecords | async">
   <p>{{ exerciseRecord.recorded }}</p>

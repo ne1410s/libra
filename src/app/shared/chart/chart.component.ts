@@ -26,8 +26,16 @@ export class ChartComponent implements OnInit {
   public massRecords: Observable<MassRecord[]>;
 
   get periodDescription(): string {
-    return this.massRecordService.getPeriodDescription(this.period, this.offset);
+    return MassRecordService.getPeriodDescription(this.period, this.offset);
   }
+
+  chartLabels: Array<any> = ['January', 'February', 'March', 'April', 'May', 'June', 'July'];
+  chartOptions: any = { maintainAspectRatio: false };
+  chartDatasets: Array<any> = [
+    {data: [65, 59, 80, 81, 56, 55, 40], label: 'Series A'},
+    {data: [28, 48, 40, 19, 86, 27, 90], label: 'Series B'},
+    {data: [18, 48, 77, 9, 100, 27, 40], label: 'Series C'},
+  ];
 
   constructor(
       private foodRecordService: FoodRecordService,
@@ -35,29 +43,28 @@ export class ChartComponent implements OnInit {
       private massRecordService: MassRecordService) { }
 
   ngOnInit(): void {
-    this.naiveUpdate();
+    this.applyRangeFilter();
   }
 
   onOffsetChanged(offset: number): void {
     this.offset = offset;
-    this.naiveUpdate();
+    this.applyRangeFilter();
   }
 
   onPeriodChanged(period: Period): void {
     this.offset = 0;
     this.period = period;
-    this.naiveUpdate();
+    this.applyRangeFilter();
   }
 
-  /**
-   * @deprecated Unnecessary hit as per current implementation; the lists are retrieved in full with
-   * the below calls anyway, and there is no reason for them not to be cached for filtering. A reset
-   * could be called when a record is added/amended/deleted (for example), but even this could be
-   * managed in the cache.
-   */
-  naiveUpdate(): void {
+  /** Entrusts the service with caching, etc. */
+  applyRangeFilter(): void {
     this.exerciseRecords = this.exerciseRecordService.listForPeriod(this.period, this.offset);
     this.foodRecords = this.foodRecordService.listForPeriod(this.period, this.offset);
     this.massRecords = this.massRecordService.listForPeriod(this.period, this.offset);
+  }
+
+  chartClicked(e: any): void {
+    console.log(e);
   }
 }

@@ -14,28 +14,21 @@ export enum Period { Week, Month, Year }
 @Injectable()
 export abstract class DateCrudService<T extends DateRecord> extends CrudService<T> {
 
-  constructor(protected http: Http) {
-    super(http);
-  }
+  private allRecordsCache: Observable<T[]>;
 
-  listForPeriod(period: Period, offset: number): Observable<T[]> {
-    const dateRange = this.getDates(period, offset);
-    return this.listInRange(dateRange);
-  }
-
-  getDates(period: Period, offset: number): [Date, Date] {
+  public static getDates(period: Period, offset: number): [Date, Date] {
     switch (period) {
       case Period.Week:
-        return this.weekRange(offset);
+        return DateCrudService.weekRange(offset);
       case Period.Month:
-        return this.monthRange(offset);
+        return DateCrudService.monthRange(offset);
       case Period.Year:
-        return this.yearRange(offset);
+        return DateCrudService.yearRange(offset);
     }
   }
 
-  getPeriodDescription(period: Period, offset: number): string {
-    const start = this.getDates(period, offset)[0];
+  public static getPeriodDescription(period: Period, offset: number): string {
+    const start = DateCrudService.getDates(period, offset)[0];
     switch (period) {
       case Period.Week:
         return `w/c ${start.toDateString().substr(4, 11)}`;
@@ -46,7 +39,7 @@ export abstract class DateCrudService<T extends DateRecord> extends CrudService<
     }
   }
 
-  private weekRange(offset = 0): [Date, Date] {
+  public static weekRange(offset = 0): [Date, Date] {
     const now = new Date();
     const weekStart = 1 + now.getDate() - now.getDay();
     const start = new Date(now.getFullYear(), now.getMonth(), weekStart + (offset * 7));
@@ -54,7 +47,7 @@ export abstract class DateCrudService<T extends DateRecord> extends CrudService<
     return [start, end];
   }
 
-  private monthRange(offset = 0): [Date, Date] {
+  public static monthRange(offset = 0): [Date, Date] {
     const now = new Date();
     const month = now.getMonth();
     const start = new Date(now.getFullYear(), month + offset);
@@ -62,7 +55,7 @@ export abstract class DateCrudService<T extends DateRecord> extends CrudService<
     return [start, end];
   }
 
-  private yearRange(offset = 0): [Date, Date] {
+  public static yearRange(offset = 0): [Date, Date] {
     const now = new Date();
     const year = now.getFullYear();
     const start = new Date(year + offset, 0);
@@ -70,10 +63,29 @@ export abstract class DateCrudService<T extends DateRecord> extends CrudService<
     return [start, end];
   }
 
+  constructor(protected http: Http) {
+    super(http);
+  }
+
+  listForPeriod(period: Period, offset: number): Observable<T[]> {
+    const dateRange = DateCrudService.getDates(period, offset);
+    return this.listInRange(dateRange);
+  }
+
   private listInRange(dateRange: [Date, Date]): Observable<T[]> {
-    return this.filterAll((item: T) => {
-      const recorded = new Date(item.recorded);
-      return recorded >= dateRange[0] && recorded <= dateRange[1];
+
+    if (!this.allRecordsCache) {
+      console.log(`${this.apiEntityPath}: Calling http to update the cache`);
+      this.allRecordsCache = this.list();
+    }
+
+    return this.allRecordsCache.map(items => {
+      return items.filter(item => this.rangeFilter(item, dateRange[0], dateRange[1]));
     });
+  }
+
+  private rangeFilter(item: T, start: Date, end: Date): boolean {
+    const recorded = new Date(item.recorded);
+    return recorded >= start && recorded <= end;
   }
 }

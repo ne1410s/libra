@@ -63,17 +63,6 @@ export abstract class CrudService<T extends Record> {
         .catch(CrudService.handleError);
   }
 
-  filterAll(filter: (item: T) => boolean): Observable<T[]> {
-    const url = `${this.apiBase}/${this.apiEntityPath}`;
-    return this.http
-        .get(url, { headers: this.headers })
-        .map(res => {
-          const allData = res.json().data as T[];
-          return allData.filter(filter);
-        })
-        .catch(CrudService.handleError);
-  }
-
   search(params: QSQuery): Observable<T[]> {
     const url = `${this.apiBase}/${this.apiEntityPath}`;
     return this.http
