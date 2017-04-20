@@ -29,7 +29,7 @@ export class ChartComponent implements OnInit {
   }
 
   chartOptions: any;
-  chartData = [{ data: [] }];
+  chartData = [{ data: [], label: 'Mass' }];
 
   constructor(
       private foodRecordService: FoodRecordService,
@@ -59,7 +59,7 @@ export class ChartComponent implements OnInit {
     this.massRecordService
       .listForPeriod(this.period, this.offset, 1)
       .subscribe(items => {
-        this.chartData = [{ data: items.map(m => { return { x: m.recorded, y: m.kilos }; }) }];
+        this.chartData = [{ data: items.map(m => { return { x: m.recorded, y: m.kilos }; }), label: 'Mass' }];
       });
 
     this.exerciseRecordService
@@ -77,9 +77,5 @@ export class ChartComponent implements OnInit {
           return cur.foodItem.calsPerGram * cur.grams;
         }, 0);
       });
-  }
-
-  chartClicked(e: any): void {
-    console.log(e);
   }
 }

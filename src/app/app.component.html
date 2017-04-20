@@ -1,5 +1,17 @@
-<h1>
-  {{title}}
-</h1>
-
-<app-chart></app-chart>
+<header>
+  <div>
+    <h1>Libra</h1>
+    <nav>
+      <a routerLink="/records" routerLinkActive="active">Records</a>
+      <a routerLink="/lists" routerLinkActive="active">Lists</a>
+    </nav>
+  </div>
+</header>
+<section class="content">
+  <router-outlet></router-outlet>
+</section>
+<footer>
+  <div>
+    <p>Copyright &copy; 2017</p>
+  </div>
+</footer>

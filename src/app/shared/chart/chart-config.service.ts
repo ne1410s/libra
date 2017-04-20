@@ -13,6 +13,12 @@ export class ChartConfigService {
     legend: {
       display: false,
     },
+    tooltips: {
+      callbacks: {
+        title: item => `${new Date(item[0].xLabel).toDateString()}`,
+        label: item => `Mass: ${item.yLabel} kg`
+      }
+    },
     scales: {
       xAxes: [{
         type: 'time',
