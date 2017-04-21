@@ -1,6 +1,9 @@
 import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
 
 import { RecordsRoutingModule } from './records-routing.module';
+import { SharedModule } from 'app/shared/shared.module';
+
 import { RecordsSummaryComponent } from './records-summary/records-summary.component';
 import { ExerciseRecordListComponent } from './exercise-record/exercise-record-list/exercise-record-list.component';
 import { FoodRecordListComponent } from './food-record/food-record-list/food-record-list.component';
@@ -15,7 +18,9 @@ import { MassRecordDetailComponent } from './mass-record/mass-record-detail/mass
 
 @NgModule({
   imports: [
-    RecordsRoutingModule
+    CommonModule,
+    RecordsRoutingModule,
+    SharedModule
   ],
   declarations: [
     RecordsSummaryComponent,

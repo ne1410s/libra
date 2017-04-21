@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
 
 import { FoodItem } from '../food-item';
@@ -14,6 +15,7 @@ export class FoodItemListComponent implements OnInit {
   foodItems: Observable<FoodItem[]>;
 
   constructor(
+    private router: Router,
     private foodItemService: FoodItemService) { }
 
   ngOnInit() {
@@ -21,6 +23,6 @@ export class FoodItemListComponent implements OnInit {
   }
 
   onRowClicked(foodItem: FoodItem): void {
-    console.log(foodItem);
+    this.router.navigate([`/items/food/${foodItem.id}`]);
   }
 }

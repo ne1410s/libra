@@ -66,7 +66,7 @@ export class ChartComponent implements OnInit {
       .listForPeriod(this.period, this.offset)
       .subscribe(items => {
         this.outCals = items.reduce((tot, cur) => {
-          return cur.exerciseItem.calsPerHour * cur.minutes / 60;
+          return cur.entity.calsPerHour * cur.minutes / 60;
         }, 0);
       });
 
@@ -74,7 +74,7 @@ export class ChartComponent implements OnInit {
       .listForPeriod(this.period, this.offset)
       .subscribe(items => {
         this.inCals = items.reduce((tot, cur) => {
-          return cur.foodItem.calsPerGram * cur.grams;
+          return cur.entity.calsPerGram * cur.grams;
         }, 0);
       });
   }

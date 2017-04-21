@@ -33,8 +33,8 @@ export class ChartConfigService {
       }],
       yAxes: [{
         ticks: {
-          min: 80,
-          max: 120,
+          min: 86,
+          max: 104,
         }
       }]
     }

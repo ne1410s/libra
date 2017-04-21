@@ -1,4 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { Observable } from 'rxjs/Observable';
+
+import { MassRecord } from '../mass-record';
+import { MassRecordService } from '../mass-record.service';
 
 @Component({
   selector: 'app-mass-record-list',
@@ -7,9 +12,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MassRecordListComponent implements OnInit {
 
-  constructor() { }
+  massRecords: Observable<MassRecord[]>;
+
+  constructor(
+    private router: Router,
+    private massRecordService: MassRecordService) { }
 
   ngOnInit() {
+    this.massRecords = this.massRecordService.list();
   }
 
+  onRowClicked(massRecord: MassRecord): void {
+    this.router.navigate([`/records/mass/${massRecord.id}`]);
+  }
 }

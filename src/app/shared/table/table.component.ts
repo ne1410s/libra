@@ -8,13 +8,15 @@ import { Observable } from 'rxjs/Observable';
 })
 export class TableComponent implements OnInit {
   @Input() records: Observable<any[]>;
+  @Input() title: string;
+  @Input() maxWidth = '100%';
   @Output() onRowClicked = new EventEmitter<any>();
 
-  keys: string[];
+  keys: string[] = [ 'Loading' ];
 
   ngOnInit(): void {
     this.records.subscribe(records => {
-      this.keys = Object.keys(records[0]).filter(key => key.toLowerCase() !== 'id');
+      this.keys = Object.keys(records[0]).filter(key => key !== 'id');
     });
   }
 

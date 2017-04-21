@@ -1,3 +1,10 @@
 <p>
   mass-record-detail works!
 </p>
+<div *ngIf="massRecord | async">
+  <p>Mass: {{ massRecord.kilos }}</p>
+  <p>Recorded on: {{ massRecord.recorded }}</p>
+</div>
+<div *ngIf="!(massRecord | async)">
+  <p>No mass record :'''(</p>
+</div>

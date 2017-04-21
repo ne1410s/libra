@@ -1,4 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { Observable } from 'rxjs/Observable';
+
+import { ExerciseRecord } from '../exercise-record';
+import { ExerciseRecordService } from '../exercise-record.service';
 
 @Component({
   selector: 'app-exercise-record-list',
@@ -7,9 +12,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ExerciseRecordListComponent implements OnInit {
 
-  constructor() { }
+  exerciseRecords: Observable<ExerciseRecord[]>;
+
+  constructor(
+    private router: Router,
+    private exerciseRecordService: ExerciseRecordService) { }
 
   ngOnInit() {
+    this.exerciseRecords = this.exerciseRecordService.list();
+  }
+
+  onRowClicked(exerciseRecord: ExerciseRecord): void {
+    this.router.navigate([`/records/exercise/${exerciseRecord.id}`]);
   }
 
 }

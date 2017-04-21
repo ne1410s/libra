@@ -4,10 +4,10 @@ import { FoodItem } from 'app/items/food-item/food-item';
 export class FoodRecord extends EntityRecord<FoodItem> {
 
     constructor(
-            public foodItem: FoodItem,
+            public entity: FoodItem,
             public grams: number,
             recorded?: Date) {
 
-        super(foodItem, recorded);
+        super(entity, recorded);
     }
 }

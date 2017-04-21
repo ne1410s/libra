@@ -1,6 +1,6 @@
-<h4>Generic Table</h4>
+<h4 *ngIf="title">{{ title }}</h4>
 
-<div class="table">
+<div class="table" [style.maxWidth]="maxWidth">
   <div class="header row">
     <!-- Fill in columns according to key map -->
     <div class="cell" *ngFor="let key of keys">
