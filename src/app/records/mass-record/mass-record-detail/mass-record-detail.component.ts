@@ -14,14 +14,17 @@ import { MassRecordService } from '../mass-record.service';
 })
 export class MassRecordDetailComponent implements OnInit {
 
-  massRecord: Observable<MassRecord>;
+  massRecord: MassRecord;
 
   constructor(
     private route: ActivatedRoute,
     private massRecordService: MassRecordService) { }
 
   ngOnInit() {
-    this.massRecord = this.route.params
-      .switchMap(params => this.massRecordService.get(+params['id']));
+    this.route.params
+      .switchMap(params => this.massRecordService.get(+params['id']))
+      .subscribe(massRecord => {
+        this.massRecord = massRecord;
+      });
   }
 }
