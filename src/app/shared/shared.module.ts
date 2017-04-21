@@ -11,6 +11,7 @@ import { MockHttpModule } from './http/mock-http.module';
 import { QueryStringService } from './http/query-string.service';
 import { DateRangePickerComponent } from './date-range-picker/date-range-picker.component';
 import { ChartConfigService } from './chart/chart-config.service';
+import { TableComponent } from './table/table.component';
 
 const USE_MOCK_HTTP = true;
 
@@ -25,11 +26,13 @@ const USE_MOCK_HTTP = true;
     NotFoundComponent,
     ChartComponent,
     DateRangePickerComponent,
+    TableComponent,
   ],
   exports: [
     NotFoundComponent,
     ChartComponent,
-    DateRangePickerComponent
+    DateRangePickerComponent,
+    TableComponent
   ],
   providers: [
     QueryStringService,

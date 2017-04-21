@@ -7,12 +7,17 @@ import { ExerciseRecordListComponent } from './exercise-record/exercise-record-l
 import { FoodRecordListComponent } from './food-record/food-record-list/food-record-list.component';
 import { MassRecordListComponent } from './mass-record/mass-record-list/mass-record-list.component';
 
-const recordRoutes: Routes = [
-  { path: '', component: RecordsSummaryComponent },
-  { path: 'exercise', component: ExerciseRecordListComponent },
-  { path: 'food', component: FoodRecordListComponent },
-  { path: 'mass', component: MassRecordListComponent },
-];
+const recordRoutes: Routes = [{
+  path: '',
+  component: RecordsSummaryComponent,
+  // Nesting routes like this allows the summary component to serve as a router 'template'
+  // Could specify the below *alongside* the summary instead, but then its html will not be shared
+  children: [
+    { path: 'exercise', component: ExerciseRecordListComponent },
+    { path: 'food', component: FoodRecordListComponent },
+    { path: 'mass', component: MassRecordListComponent },
+  ]
+}];
 
 @NgModule({
   imports: [
