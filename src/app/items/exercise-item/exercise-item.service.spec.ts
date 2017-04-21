@@ -1,15 +1,15 @@
 import { TestBed, inject } from '@angular/core/testing';
 
-import { ExerciseService } from './exercise.service';
+import { ExerciseItemService } from './exercise-item.service';
 
 describe('ExerciseService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [ExerciseService]
+      providers: [ExerciseItemService]
     });
   });
 
-  it('should ...', inject([ExerciseService], (service: ExerciseService) => {
+  it('should ...', inject([ExerciseItemService], (service: ExerciseItemService) => {
     expect(service).toBeTruthy();
   }));
 });

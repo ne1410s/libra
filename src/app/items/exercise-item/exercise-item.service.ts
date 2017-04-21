@@ -2,10 +2,10 @@ import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 
 import { CrudService } from 'app/shared/model/crud-service.service';
-import { Exercise } from './exercise';
+import { ExerciseItem } from 'app/items/exercise-item/exercise-item';
 
 @Injectable()
-export class ExerciseService extends CrudService<Exercise> {
+export class ExerciseItemService extends CrudService<ExerciseItem> {
 
   protected apiEntityPath = 'exerciseItems';
 

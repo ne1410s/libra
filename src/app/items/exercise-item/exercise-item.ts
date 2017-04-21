@@ -1,6 +1,6 @@
 import { Record } from 'app/shared/model/record';
 
-export class Exercise extends Record {
+export class ExerciseItem extends Record {
 
     constructor(
             public name: string,

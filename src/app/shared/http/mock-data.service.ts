@@ -2,12 +2,12 @@ import { Injectable } from '@angular/core';
 import { InMemoryDbService } from 'angular-in-memory-web-api';
 
 import { Record } from 'app/shared/model/record';
-import { FoodItem } from 'app/food/food-item';
-import { FoodRecord } from 'app/food/food-record';
-import { Exercise } from 'app/exercise/exercise';
-import { ExerciseRecord } from 'app/exercise/exercise-record';
-import { MassRecord } from 'app/mass/mass-record';
-import { Recipe } from 'app/food/recipe';
+import { FoodItem } from 'app/items/food-item/food-item';
+import { FoodRecord } from 'app/records/food-record/food-record';
+import { ExerciseItem } from 'app/items/exercise-item/exercise-item';
+import { ExerciseRecord } from 'app/records/exercise-record/exercise-record';
+import { MassRecord } from 'app/records/mass-record/mass-record';
+import { Recipe } from 'app/items/recipe/recipe';
 
 @Injectable()
 export class MockDataService implements InMemoryDbService {
@@ -32,11 +32,11 @@ export class MockDataService implements InMemoryDbService {
       // TODO!
     ];
 
-    const exercises: Exercise[] = [
-      new Exercise('Walking', 150),
-      new Exercise('Jogging', 600),
-      new Exercise('Running', 800),
-      new Exercise('Sprinting', 1000)
+    const exercises: ExerciseItem[] = [
+      new ExerciseItem('Walking', 150),
+      new ExerciseItem('Jogging', 600),
+      new ExerciseItem('Running', 800),
+      new ExerciseItem('Sprinting', 1000)
     ];
 
     const exerciseRecords: ExerciseRecord[] = [

@@ -3,12 +3,12 @@ import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 
 import { DateCrudService, Period } from 'app/shared/model/date-crud-service.service';
-import { ExerciseRecord } from 'app/exercise/exercise-record';
-import { ExerciseRecordService } from 'app/exercise/exercise-record.service';
-import { FoodRecord } from 'app/food/food-record';
-import { FoodRecordService } from 'app/food/food-record.service';
-import { MassRecord } from 'app/mass/mass-record';
-import { MassRecordService } from 'app/mass/mass-record.service';
+import { ExerciseRecord } from 'app/records/exercise-record/exercise-record';
+import { ExerciseRecordService } from 'app/records/exercise-record/exercise-record.service';
+import { FoodRecord } from 'app/records/food-record/food-record';
+import { FoodRecordService } from 'app/records/food-record/food-record.service';
+import { MassRecord } from 'app/records/mass-record/mass-record';
+import { MassRecordService } from 'app/records/mass-record/mass-record.service';
 import { ChartConfigService } from './chart-config.service';
 
 @Component({
@@ -66,7 +66,7 @@ export class ChartComponent implements OnInit {
       .listForPeriod(this.period, this.offset)
       .subscribe(items => {
         this.outCals = items.reduce((tot, cur) => {
-          return cur.exercise.calsPerHour * cur.minutes / 60;
+          return cur.exerciseItem.calsPerHour * cur.minutes / 60;
         }, 0);
       });
 
