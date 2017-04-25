@@ -17,11 +17,8 @@ const recordRoutes: Routes = [{
   // Could specify the below *alongside* the summary instead, but then its html will not be shared
   children: [
     { path: 'exercise', component: ExerciseRecordListComponent },
-    { path: 'exercise/:id', component: ExerciseRecordDetailComponent },
     { path: 'food', component: FoodRecordListComponent },
-    { path: 'food/:id', component: FoodRecordDetailComponent },
-    { path: 'mass', component: MassRecordListComponent },
-    { path: 'mass/:id', component: MassRecordDetailComponent },
+    { path: 'mass', component: MassRecordListComponent }
   ]
 }];
 

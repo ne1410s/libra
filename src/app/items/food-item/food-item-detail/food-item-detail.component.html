@@ -1,3 +1,16 @@
-<p>
-  food-item-detail works!
-</p>
+<div class="detail">
+  <div *ngIf="foodItem">
+    <form>
+      <label for="name">Name</label>
+      <input id="name" name="name" type="text" [(ngModel)]="foodItem.name"/>
+      <label for="calsPerGram">Cals</label>
+      <input id="calsPerGram" name="calsPerGram" type="number" min="0" step="0.1" [(ngModel)]="foodItem.calsPerGram"/>
+      <label for="carbsPerGram">Carbs</label>
+      <input id="carbsPerGram" name="carbsPerGram" type="number" min="0" step="0.1" [(ngModel)]="foodItem.carbsPerGram"/>
+      <label for="fatPerGram">Fat</label>
+      <input id="fatPerGram" name="fatPerGram" type="number" min="0" step="0.1" [(ngModel)]="foodItem.fatPerGram"/>
+      <label for="proteinPerGram">Protein</label>
+      <input id="proteinPerGram" name="proteinPerGram" type="number" min="0" step="0.1" [(ngModel)]="foodItem.proteinPerGram"/>
+    </form>
+  </div>
+</div>

@@ -1,3 +1,13 @@
-<p>
-  food-record-detail works!
-</p>
+<div class="detail">
+  <div *ngIf="foodRecord">
+    <form>
+      <label for="grams">Mass</label>
+      <input id="grams" name="grams" type="number" step="0.1" min="0"
+            [(ngModel)]="foodRecord.grams"/>
+      <label for="recorded">Date</label>
+      <input id="recorded" name="recorded" type="datetime-local"
+            [ngModel]="foodRecord.recorded | date:'yyyy-MM-ddTHH:mm'" 
+            (ngModelChange)="foodRecord.recorded = $event;"/>
+    </form>
+  </div>
+</div>

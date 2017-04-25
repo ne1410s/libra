@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
 
 import { Column } from 'app/shared/table/table.component';
@@ -13,11 +12,11 @@ import { FoodItemService } from '../food-item.service';
 })
 export class FoodItemListComponent implements OnInit {
 
+  viewRecord: FoodItem;
   foodItems: Observable<FoodItem[]>;
   columns: Column[];
 
   constructor(
-    private router: Router,
     private foodItemService: FoodItemService) { }
 
   ngOnInit() {
@@ -32,6 +31,6 @@ export class FoodItemListComponent implements OnInit {
   }
 
   onRowClicked(foodItem: FoodItem): void {
-    this.router.navigate([`/items/food/${foodItem.id}`]);
+    this.viewRecord = foodItem;
   }
 }

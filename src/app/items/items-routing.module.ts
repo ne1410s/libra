@@ -15,9 +15,7 @@ const itemRoutes: Routes = [{
   // Could specify the below *alongside* the summary instead, but then its html will not be shared
   children: [
     { path: 'exercise', component: ExerciseItemListComponent },
-    { path: 'exercise/:id', component: ExerciseItemDetailComponent },
     { path: 'food', component: FoodItemListComponent },
-    { path: 'food/:id', component: FoodItemDetailComponent },
   ]
 }];
 

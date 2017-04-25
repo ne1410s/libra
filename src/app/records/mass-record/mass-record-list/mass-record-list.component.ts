@@ -42,6 +42,5 @@ export class MassRecordListComponent implements OnInit {
 
   onRowClicked(massRecord: MassRecord): void {
     this.viewRecord = massRecord;
-    //// this.router.navigate([`/records/mass/${massRecord.id}`]);
   }
 }

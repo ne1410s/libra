@@ -1,3 +1,10 @@
-<p>
-  exercise-item-detail works!
-</p>
+<div class="detail">
+  <div *ngIf="exerciseItem">
+    <form>
+      <label for="name">Name</label>
+      <input id="name" name="name" type="text" [(ngModel)]="exerciseItem.name"/>
+      <label for="calsPerHour">Cals</label>
+      <input id="calsPerHour" name="calsPerHour" type="number" min="0" step="10" [(ngModel)]="exerciseItem.calsPerHour"/>
+    </form>
+  </div>
+</div>

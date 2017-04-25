@@ -1,21 +1,13 @@
 <div class="detail">
-  <h4>Mass Record Detail</h4>
   <div *ngIf="massRecord">
     <form>
       <label for="kilos">Mass</label>
-      <input id="kilos" name="kilos" [ngModel]="massRecord.kilos" (ngModelChange)="massRecord.kilos = $event; queueUpdate()" type="number" step="0.1" min="40" max="400"/>
+      <input id="kilos" name="kilos" type="number" step="0.01" min="40" max="400"
+            [(ngModel)]="massRecord.kilos"/>
       <label for="recorded">Date</label>
-      <input id="recorded" name="recorded" [ngModel]="massRecord.recorded | date:'yyyy-MM-ddTHH:mm'" (ngModelChange)="massRecord.recorded = $event; queueUpdate()" type="datetime-local"/>
+      <input id="recorded" name="recorded" type="datetime-local"
+            [ngModel]="massRecord.recorded | date:'yyyy-MM-ddTHH:mm'" 
+            (ngModelChange)="massRecord.recorded = $event;"/>
     </form>
-    <p>{{ massRecord.kilos }}</p>
-    <p>{{ massRecord.recorded }}</p>
   </div>
-  <div *ngIf="!massRecord && !hasErrored">
-    <i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
-    <span class="sr-only">Loading...</span>
-  </div>
-  <div *ngIf="!massRecord && hasErrored">
-    <p>An error has occurred :S</p>
-  </div>
-  <button (click)="goBack()">Back To List</button>
 </div>

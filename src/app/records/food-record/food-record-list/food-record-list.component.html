@@ -1,7 +1,8 @@
-<app-table 
-    [records]="foodRecords"
-    [columns]="columns"
-    heading="Food Records"
-    maxWidth="600px"
-    (onRowClicked)="onRowClicked($event)">
+<app-table [records]="foodRecords"
+        [columns]="columns"
+        heading="Food Records"
+        maxWidth="600px"
+        (onRowClicked)="onRowClicked($event)">
+    
+    <app-food-record-detail [foodRecord]="viewRecord"></app-food-record-detail>
 </app-table>
