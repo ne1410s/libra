@@ -40,13 +40,13 @@ export class MockDataService implements InMemoryDbService {
     ];
 
     const exerciseRecords: ExerciseRecord[] = [
-      new ExerciseRecord(exercises[0], 800),
-      new ExerciseRecord(exercises[1], 100),
+      new ExerciseRecord(exercises[0], 165),
+      new ExerciseRecord(exercises[1], 20),
     ];
 
     const massRecords: MassRecord[] = [
       new MassRecord(100, new Date(2017, 2, 22, 7, 30)),
-      new MassRecord(96.3, new Date(2017, 3, 21, 7, 30)),
+      new MassRecord(96.343, new Date(2017, 3, 21, 7, 30)),
     ];
 
     MockDataService.applyIncrementalIds(foods);

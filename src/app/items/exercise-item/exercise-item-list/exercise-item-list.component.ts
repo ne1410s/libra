@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
 
+import { Column } from 'app/shared/table/table.component';
 import { ExerciseItem } from '../exercise-item';
 import { ExerciseItemService } from '../exercise-item.service';
 
@@ -13,6 +14,7 @@ import { ExerciseItemService } from '../exercise-item.service';
 export class ExerciseItemListComponent implements OnInit {
 
   exerciseItems: Observable<ExerciseItem[]>;
+  columns: Column[];
 
   constructor(
     private router: Router,
@@ -20,6 +22,10 @@ export class ExerciseItemListComponent implements OnInit {
 
   ngOnInit() {
     this.exerciseItems = this.exerciseItemService.list();
+    this.columns = [
+      new Column('name', 'Name'),
+      new Column('calsPerHour', 'Burn Rate', '25%', v => v + ' kCal/hr')
+    ];
   }
 
   onRowClicked(exerciseItem: ExerciseItem): void {

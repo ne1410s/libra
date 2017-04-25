@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
 
+import { Column } from 'app/shared/table/table.component';
 import { FoodItem } from '../food-item';
 import { FoodItemService } from '../food-item.service';
 
@@ -13,6 +14,7 @@ import { FoodItemService } from '../food-item.service';
 export class FoodItemListComponent implements OnInit {
 
   foodItems: Observable<FoodItem[]>;
+  columns: Column[];
 
   constructor(
     private router: Router,
@@ -20,6 +22,13 @@ export class FoodItemListComponent implements OnInit {
 
   ngOnInit() {
     this.foodItems = this.foodItemService.list();
+    this.columns = [
+      new Column('name', 'Name'),
+      new Column('calsPerGram', 'Calories', '25%', v => v + ' kCal/g'),
+      new Column('carbsPerGram', 'Carbs', '25%', v => v + ' g/g'),
+      new Column('fatPerGram', 'Fat', '25%', v => v + ' g/g'),
+      new Column('proteinPerGram', 'Protein', '25%', v => v + ' g/g')
+    ];
   }
 
   onRowClicked(foodItem: FoodItem): void {

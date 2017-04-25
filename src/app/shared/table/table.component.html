@@ -1,10 +1,9 @@
-<h4 *ngIf="title">{{ title }}</h4>
+<h4 *ngIf="heading">{{ heading }}</h4>
 
 <div class="table" [style.maxWidth]="maxWidth">
   <div class="header row">
-    <!-- Fill in columns according to key map -->
-    <div class="cell" *ngFor="let key of keys">
-      <p>{{ key }}</p>
+    <div class="cell" *ngFor="let column of columns" [style.flexBasis]="column.preferredWidth">
+      <p>{{ column.name }}</p>
     </div>
   </div>
 
@@ -19,9 +18,16 @@
   </div>
 
   <div class="row" *ngFor="let record of records | async" (click)="rowClicked(record)">
-    <!-- Fill in columns according to key map -->
-    <div class="cell" *ngFor="let key of keys">
-      <p>{{ record[key] }}</p>
+    <div class="cell" *ngFor="let column of columns" [style.flexBasis]="column.preferredWidth">
+      <p>{{ column.getValue(record) }}</p>
     </div>
   </div>
+</div>
+
+<div *ngIf="viewRecord">
+  <app-popup heading="Edit Record" (onPopupClosed)="onPopupClosed()">
+    <div *ngFor="let column of columns">
+      <p>{{ column.getValue(viewRecord) }}</p>
+    </div>
+  </app-popup>
 </div>
