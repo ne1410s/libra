@@ -25,10 +25,7 @@
 </div>
 
 <div *ngIf="viewRecord">
-  <app-popup heading="Edit Record" (onPopupClosed)="onPopupClosed()">
-    <!--<div *ngFor="let column of columns">
-      <p>{{ column.getValue(viewRecord) }}</p>
-    </div>-->
+  <app-popup heading="Edit Record" (onPopupClosed)="popupClosed()">
     <ng-content></ng-content>
   </app-popup>
 </div>

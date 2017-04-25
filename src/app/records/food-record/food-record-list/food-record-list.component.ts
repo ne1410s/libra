@@ -34,4 +34,9 @@ export class FoodRecordListComponent implements OnInit {
   onRowClicked(foodRecord: FoodRecord): void {
     this.viewRecord = foodRecord;
   }
+
+  onPopupClosed(foodRecord: FoodRecord): void {
+    this.foodRecordService.update(foodRecord);
+    this.viewRecord = null;
+  }
 }

@@ -2,7 +2,7 @@
   <div *ngIf="exerciseRecord">
     <form>
       <label for="minutes">Minutes</label>
-      <input id="minutes" name="minutes" type="number" step="0.1" min="0"
+      <input id="minutes" name="minutes" type="number" step="1" min="0"
             [(ngModel)]="exerciseRecord.minutes"/>
       <label for="recorded">Date</label>
       <input id="recorded" name="recorded" type="datetime-local"

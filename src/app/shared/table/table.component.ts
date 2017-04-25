@@ -12,6 +12,7 @@ export class TableComponent implements OnInit {
   @Input() heading: string;
   @Input() maxWidth = '100%';
   @Output() onRowClicked = new EventEmitter<any>();
+  @Output() onPopupClosed = new EventEmitter<any>();
 
   viewRecord: any;
 
@@ -28,7 +29,8 @@ export class TableComponent implements OnInit {
     this.viewRecord = record;
   }
 
-  onPopupClosed(event: any): void {
+  popupClosed(event: any): void {
+    this.onPopupClosed.emit(this.viewRecord);
     this.viewRecord = null;
   }
 }

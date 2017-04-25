@@ -1,5 +1,5 @@
-<div class="popup-backing" (click)="closePopup($event)">
-  <div class="popup" [@popState]="popState" (click)="$event.stopPropagation()">
+<div class="popup-backing" [@animBacking]="popState" (click)="closePopup($event)">
+  <div class="popup" [@animDialog]="popState" (click)="$event.stopPropagation()">
     <div class="title">
       <h3 *ngIf="heading">{{ heading }}</h3>
       <i class="close fa fa-times-circle" (click)="closePopup($event)"></i>
