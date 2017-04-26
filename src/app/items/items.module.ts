@@ -7,13 +7,12 @@ import { SharedModule } from 'app/shared/shared.module';
 
 import { ItemsSummaryComponent } from './items-summary/items-summary.component';
 
-import { ExerciseItemService } from './exercise-item/exercise-item.service';
-import { FoodItemService } from './food-item/food-item.service';
+// import { ExerciseItemService } from './exercise-item/exercise-item.service';
+// import { FoodItemService } from './food-item/food-item.service';
 import { ExerciseItemListComponent } from './exercise-item/exercise-item-list/exercise-item-list.component';
 import { FoodItemListComponent } from './food-item/food-item-list/food-item-list.component';
 import { ExerciseItemDetailComponent } from './exercise-item/exercise-item-detail/exercise-item-detail.component';
 import { FoodItemDetailComponent } from './food-item/food-item-detail/food-item-detail.component';
-import { TableComponent } from 'app/shared/table/table.component';
 
 @NgModule({
   imports: [
@@ -29,10 +28,10 @@ import { TableComponent } from 'app/shared/table/table.component';
     FoodItemDetailComponent,
     FoodItemListComponent,
   ],
-  // Item services are not required globally: hence limited to this module
-  providers: [
-    ExerciseItemService,
-    FoodItemService,
-  ],
+  // Item services are now required globally: hence moved up to app module
+  // providers: [
+  //   ExerciseItemService,
+  //   FoodItemService,
+  // ],
 })
 export class ItemsModule { }

@@ -34,7 +34,7 @@ const USE_MOCK_HTTP = true;
     NotFoundComponent,
     ChartComponent,
     DateRangePickerComponent,
-    TableComponent
+    TableComponent,
   ],
   providers: [
     QueryStringService,

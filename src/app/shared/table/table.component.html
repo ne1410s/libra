@@ -30,6 +30,16 @@
       <span class="sr-only">Delete</span>
     </div>
   </div>
+
+  <div class="new row" *ngIf="newRecord" (click)="rowClicked(newRecord)">
+    <div class="cell" *ngFor="let column of columns" [style.flexBasis]="column.preferredWidth">
+      <p>New!</p>
+    </div>
+    <div class="delete cell">
+      <i class="fa fa-trash-o del" (click)="$event.stopPropagation(); newRecord = null"></i>
+      <span class="sr-only">Delete</span>
+    </div>
+  </div>
 </div>
 
 <div *ngIf="viewRecord">

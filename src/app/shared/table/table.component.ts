@@ -8,8 +8,6 @@ import { Observable } from 'rxjs/Observable';
 })
 export class TableComponent implements OnInit {
 
-  viewRecord: any;
-
   @Input() records: Observable<any[]>;
   @Input() columns: Column[];
   @Input() heading: string;
@@ -18,6 +16,9 @@ export class TableComponent implements OnInit {
   @Output() onRowClicked = new EventEmitter<any>();
   @Output() onDeleteClicked = new EventEmitter<any>();
   @Output() onPopupClosed = new EventEmitter<any>();
+
+  viewRecord: any;
+  newRecord: any;
 
   ngOnInit(): void {
     this.records.subscribe(records => {
@@ -33,7 +34,7 @@ export class TableComponent implements OnInit {
   }
 
   addClicked(): void {
-    console.log('Add clicked!');
+    this.newRecord = { id: -1 };
   }
 
   deleteClicked(record: any): void {
@@ -41,6 +42,7 @@ export class TableComponent implements OnInit {
   }
 
   popupClosed(event: any): void {
+    this.newRecord = null;
     this.onPopupClosed.emit(this.viewRecord);
     this.viewRecord = null;
   }
@@ -51,7 +53,7 @@ export class Column {
   getValue(rowObject: any, noValue: string = '---'): any {
     const retVal = rowObject[this.objectKey];
       return retVal === undefined ? noValue :
-        this.valueCallback == null ? retVal : this.valueCallback(retVal);
+        this.valueCallback == null ? retVal : this.valueCallback(retVal, rowObject);
   }
 
   get name(): string {
@@ -62,5 +64,5 @@ export class Column {
     public objectKey: string,
     public displayName?: string,
     public preferredWidth = '25%',
-    public valueCallback?: (val: any) => any) {}
+    public valueCallback?: (val: any, obj: any) => any) {}
 }

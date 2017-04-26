@@ -12,6 +12,8 @@ import { QSQuery } from '../http/query-string.service';
 @Injectable()
 export abstract class CrudService<T extends Record> {
 
+  private hackedIncrementId = 1000;
+
   protected abstract apiEntityPath: string;
   protected apiBase = 'api';
   protected headers = new Headers({'Content-Type': 'application/json'});
@@ -72,8 +74,11 @@ export abstract class CrudService<T extends Record> {
   }
 
   save(item: T): Observable<T> {
-    return item.id === -1
-        ? this.insert(item)
-        : this.update(item);
+    if (item.id === -1) {
+      item.id = ++this.hackedIncrementId;
+      return this.insert(item);
+    } else {
+      return this.update(item);
+    }
   }
 }

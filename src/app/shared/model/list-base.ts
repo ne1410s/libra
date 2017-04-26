@@ -33,7 +33,9 @@ export abstract class ListBase<T extends Record> implements OnInit {
     }
 
     onPopupClosed(record: T): void {
+        const wasNew = record.id === -1;
         this.viewRecord = null;
         this.crudService.save(record).subscribe();
+        if (wasNew) { this.allRecords = this.crudService.list(); }
     }
 }
