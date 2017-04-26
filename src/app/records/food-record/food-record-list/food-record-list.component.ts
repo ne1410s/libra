@@ -23,7 +23,7 @@ export class FoodRecordListComponent extends ListBase<FoodRecord> {
       }),
       new Column('entity', 'Food', '15%', v => v.name),
       new Column('grams', 'Mass', '15%', v => v + ' g'),
-      new Column('grams', 'Cals', '10%', (v, o) => o.entity.calsPerGram * o.grams)
+      new Column('grams', 'Cals', '10%', (v, o) => (o.entity.calsPerGram * o.grams).toFixed(0))
     ];
   }
 }

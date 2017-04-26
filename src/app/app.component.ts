@@ -7,7 +7,7 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
 
-  public heading = 'app works!';
+  public heading = 'My App';
 
   constructor() {}
 }
