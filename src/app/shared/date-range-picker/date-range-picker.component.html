@@ -7,8 +7,6 @@
   </div>
   <div>
     <span>Offset</span>
-    <select [(ngModel)]="offset" (change)="offsetChange()">
-      <option *ngFor="let option of offsetOptions" [ngValue]="option">{{ option }}</option>
-    </select>
+    <input [(ngModel)]="offset" type="number" min="-5" max="5" (change)="offsetChange()"/>
   </div>
 </div>

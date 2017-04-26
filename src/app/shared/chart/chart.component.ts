@@ -59,7 +59,10 @@ export class ChartComponent implements OnInit {
     this.massRecordService
       .listForPeriod(this.period, this.offset, 1)
       .subscribe(items => {
-        this.chartData = [{ data: items.map(m => { return { x: m.recorded, y: m.kilos }; }), label: 'Mass' }];
+        this.chartData = [{
+          data: items.map(m => { return { x: m.recorded, y: m.kilos }; }),
+          label: 'Mass'
+        }];
       });
 
     this.exerciseRecordService

@@ -1,0 +1,17 @@
+nav {
+    position: fixed;
+    top: 90px; right: 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 60px;
+}
+
+nav a {
+    font-size: 3em;
+    margin: 0 0 .2em;
+}
+
+nav a.active {
+    color: #006400;
+}

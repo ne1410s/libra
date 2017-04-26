@@ -9,6 +9,9 @@ export class ChartConfigService {
     maintainAspectRatio: true,
     title: {
       display: true,
+      fontFamily: `'Raleway', 'sans-serif'`,
+      fontSize: 20,
+      fontColor: '#f5f5f5'
     },
     legend: {
       display: false,
@@ -22,6 +25,11 @@ export class ChartConfigService {
     scales: {
       xAxes: [{
         type: 'time',
+        ticks: {
+          fontFamily: `'Raleway', 'sans-serif'`,
+          fontSize: 16,
+          fontColor: '#f5f5f5'
+        },
         time: {
           displayFormats: {
             day: 'ddd DD',
@@ -33,6 +41,9 @@ export class ChartConfigService {
       }],
       yAxes: [{
         ticks: {
+          fontFamily: `'Raleway', 'sans-serif'`,
+          fontSize: 16,
+          fontColor: '#f5f5f5',
           min: 86,
           max: 104,
         }
