@@ -1,28 +1,21 @@
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { Observable } from 'rxjs/Observable';
+import { Component } from '@angular/core';
 
 import { Column } from 'app/shared/table/table.component';
 import { MassRecord } from '../mass-record';
 import { MassRecordService } from '../mass-record.service';
+import { ListBase } from 'app/shared/model/list-base';
 
 @Component({
   selector: 'app-mass-record-list',
-  templateUrl: './mass-record-list.component.html',
-  styleUrls: ['./mass-record-list.component.css']
+  templateUrl: './mass-record-list.component.html'
 })
-export class MassRecordListComponent implements OnInit {
+export class MassRecordListComponent extends ListBase<MassRecord> {
 
-  viewRecord: MassRecord;
-  massRecords: Observable<MassRecord[]>;
-  columns: Column[];
+  constructor(protected crudService: MassRecordService) {
+    super(crudService);
+  }
 
-  constructor(
-    private router: Router,
-    private massRecordService: MassRecordService) { }
-
-  ngOnInit() {
-    this.massRecords = this.massRecordService.list();
+  initColumns(): void {
     this.columns = [
       new Column('recorded', 'Recorded On', '33%', v => {
         const recorded = new Date(v);
@@ -38,9 +31,5 @@ export class MassRecordListComponent implements OnInit {
         return `${Math.floor(lbs / 14)} st ${(lbs % 14).toFixed(1)} lb`;
       }),
     ];
-  }
-
-  onRowClicked(massRecord: MassRecord): void {
-    this.viewRecord = massRecord;
   }
 }

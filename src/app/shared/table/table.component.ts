@@ -7,14 +7,17 @@ import { Observable } from 'rxjs/Observable';
   styleUrls: ['./table.component.css']
 })
 export class TableComponent implements OnInit {
+
+  viewRecord: any;
+
   @Input() records: Observable<any[]>;
   @Input() columns: Column[];
   @Input() heading: string;
   @Input() maxWidth = '100%';
+  @Input() showDelete = true;
   @Output() onRowClicked = new EventEmitter<any>();
+  @Output() onDeleteClicked = new EventEmitter<any>();
   @Output() onPopupClosed = new EventEmitter<any>();
-
-  viewRecord: any;
 
   ngOnInit(): void {
     this.records.subscribe(records => {
@@ -27,6 +30,14 @@ export class TableComponent implements OnInit {
   rowClicked(record: any): void {
     this.onRowClicked.emit(record);
     this.viewRecord = record;
+  }
+
+  addClicked(): void {
+    console.log('Add clicked!');
+  }
+
+  deleteClicked(record: any): void {
+    this.onDeleteClicked.emit(record);
   }
 
   popupClosed(event: any): void {

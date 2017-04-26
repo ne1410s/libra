@@ -1,26 +1,21 @@
-import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
+import { Component } from '@angular/core';
 
 import { Column } from 'app/shared/table/table.component';
 import { ExerciseRecord } from '../exercise-record';
 import { ExerciseRecordService } from '../exercise-record.service';
+import { ListBase } from 'app/shared/model/list-base';
 
 @Component({
   selector: 'app-exercise-record-list',
-  templateUrl: './exercise-record-list.component.html',
-  styleUrls: ['./exercise-record-list.component.css']
+  templateUrl: './exercise-record-list.component.html'
 })
-export class ExerciseRecordListComponent implements OnInit {
+export class ExerciseRecordListComponent extends ListBase<ExerciseRecord> {
 
-  viewRecord: ExerciseRecord;
-  exerciseRecords: Observable<ExerciseRecord[]>;
-  columns: Column[];
+  constructor(protected crudService: ExerciseRecordService) {
+    super(crudService);
+  }
 
-  constructor(
-    private exerciseRecordService: ExerciseRecordService) { }
-
-  ngOnInit() {
-    this.exerciseRecords = this.exerciseRecordService.list();
+  initColumns(): void {
     this.columns = [
       new Column('recorded', 'Recorded On', '25%', v => {
         const recorded = new Date(v);
@@ -29,9 +24,5 @@ export class ExerciseRecordListComponent implements OnInit {
       new Column('entity', 'Exercise', '25%', v => v.name),
       new Column('minutes', 'Duration', '25%', v => v + ' mins'),
     ];
-  }
-
-  onRowClicked(exerciseRecord: ExerciseRecord): void {
-    this.viewRecord = exerciseRecord;
   }
 }

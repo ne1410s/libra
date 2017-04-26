@@ -1,13 +1,13 @@
 <div class="detail">
-  <div *ngIf="exerciseRecord">
+  <div *ngIf="detailItem">
     <form>
       <label for="minutes">Minutes</label>
       <input id="minutes" name="minutes" type="number" step="1" min="0"
-            [(ngModel)]="exerciseRecord.minutes"/>
+            [(ngModel)]="detailItem.minutes"/>
       <label for="recorded">Date</label>
       <input id="recorded" name="recorded" type="datetime-local"
-            [ngModel]="exerciseRecord.recorded | date:'yyyy-MM-ddTHH:mm'" 
-            (ngModelChange)="exerciseRecord.recorded = $event;"/>
+            [ngModel]="detailItem.recorded | date:'yyyy-MM-ddTHH:mm'" 
+            (ngModelChange)="detailItem.recorded = $event;"/>
     </form>
   </div>
 </div>

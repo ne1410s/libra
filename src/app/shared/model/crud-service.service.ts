@@ -70,4 +70,10 @@ export abstract class CrudService<T extends Record> {
         .map(response => response.json().data as T[])
         .catch(CrudService.handleError);
   }
+
+  save(item: T): Observable<T> {
+    return item.id === -1
+        ? this.insert(item)
+        : this.update(item);
+  }
 }

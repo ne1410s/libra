@@ -1,8 +1,10 @@
-<app-table [records]="exerciseItems"
+<app-table [records]="allRecords"
         [columns]="columns"
         heading="Exercises"
         maxWidth="600px"
-        (onRowClicked)="onRowClicked($event)">
+        (onRowClicked)="onRowClicked($event)"
+        (onDeleteClicked)="onDeleteClicked($event)"
+        (onPopupClosed)="onPopupClosed($event)">
 
-    <app-exercise-item-detail [exerciseItem]="viewRecord"></app-exercise-item-detail>
+    <app-exercise-item-detail [detailItem]="viewRecord"></app-exercise-item-detail>
 </app-table>

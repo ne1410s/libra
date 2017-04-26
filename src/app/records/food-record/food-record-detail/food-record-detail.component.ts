@@ -1,12 +1,11 @@
-import { Component, Input } from '@angular/core';
+import { Component } from '@angular/core';
 
 import { FoodRecord } from '../food-record';
+import { DetailBase } from 'app/shared/model/detail-base';
 
 @Component({
   selector: 'app-food-record-detail',
   templateUrl: './food-record-detail.component.html',
-  styleUrls: ['./food-record-detail.component.css']
+  styleUrls: ['../../../shared/styles/item-detail.css']
 })
-export class FoodRecordDetailComponent {
-  @Input() foodRecord: FoodRecord;
-}
+export class FoodRecordDetailComponent extends DetailBase<FoodRecord> {}

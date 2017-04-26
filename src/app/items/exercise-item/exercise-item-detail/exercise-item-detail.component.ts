@@ -1,12 +1,11 @@
-import { Component, Input } from '@angular/core';
+import { Component } from '@angular/core';
 
 import { ExerciseItem } from '../exercise-item';
+import { DetailBase } from 'app/shared/model/detail-base';
 
 @Component({
   selector: 'app-exercise-item-detail',
   templateUrl: './exercise-item-detail.component.html',
-  styleUrls: ['./exercise-item-detail.component.css']
+  styleUrls: ['../../../shared/styles/item-detail.css']
 })
-export class ExerciseItemDetailComponent {
-  @Input() exerciseItem: ExerciseItem;
-}
+export class ExerciseItemDetailComponent extends DetailBase<ExerciseItem> {}

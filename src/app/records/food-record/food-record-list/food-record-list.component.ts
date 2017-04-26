@@ -1,26 +1,21 @@
-import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
+import { Component } from '@angular/core';
 
 import { Column } from 'app/shared/table/table.component';
 import { FoodRecord } from '../food-record';
 import { FoodRecordService } from '../food-record.service';
+import { ListBase } from 'app/shared/model/list-base';
 
 @Component({
   selector: 'app-food-record-list',
-  templateUrl: './food-record-list.component.html',
-  styleUrls: ['./food-record-list.component.css']
+  templateUrl: './food-record-list.component.html'
 })
-export class FoodRecordListComponent implements OnInit {
+export class FoodRecordListComponent extends ListBase<FoodRecord> {
 
-  viewRecord: FoodRecord;
-  foodRecords: Observable<FoodRecord[]>;
-  columns: Column[];
+  constructor(protected crudService: FoodRecordService) {
+    super(crudService);
+  }
 
-  constructor(
-    private foodRecordService: FoodRecordService) { }
-
-  ngOnInit() {
-    this.foodRecords = this.foodRecordService.list();
+  initColumns(): void {
     this.columns = [
       new Column('recorded', 'Recorded On', '25%', v => {
         const recorded = new Date(v);
@@ -29,14 +24,5 @@ export class FoodRecordListComponent implements OnInit {
       new Column('entity', 'Food', '25%', v => v.name),
       new Column('grams', 'Mass', '25%', v => v + ' g'),
     ];
-  }
-
-  onRowClicked(foodRecord: FoodRecord): void {
-    this.viewRecord = foodRecord;
-  }
-
-  onPopupClosed(foodRecord: FoodRecord): void {
-    this.foodRecordService.update(foodRecord);
-    this.viewRecord = null;
   }
 }

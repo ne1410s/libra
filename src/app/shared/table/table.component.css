@@ -45,3 +45,20 @@ h4 {
     text-align: center;
     padding: 2em 0;
 }
+
+.table .row > .delete.cell {
+    text-align: center;
+    flex: 20px 0 0;
+}
+
+.delete.cell .fa {
+    cursor: pointer;
+}
+
+.fa.del:hover {
+    color: #c00000;
+}
+
+.fa.add:hover {
+    color: #00c000;
+}

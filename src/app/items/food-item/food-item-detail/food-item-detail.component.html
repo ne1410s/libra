@@ -1,16 +1,16 @@
 <div class="detail">
-  <div *ngIf="foodItem">
+  <div *ngIf="detailItem">
     <form>
       <label for="name">Name</label>
-      <input id="name" name="name" type="text" [(ngModel)]="foodItem.name"/>
+      <input id="name" name="name" type="text" [(ngModel)]="detailItem.name"/>
       <label for="calsPerGram">Cals</label>
-      <input id="calsPerGram" name="calsPerGram" type="number" min="0" step="0.1" [(ngModel)]="foodItem.calsPerGram"/>
+      <input id="calsPerGram" name="calsPerGram" type="number" min="0" step="0.1" [(ngModel)]="detailItem.calsPerGram"/>
       <label for="carbsPerGram">Carbs</label>
-      <input id="carbsPerGram" name="carbsPerGram" type="number" min="0" step="0.1" [(ngModel)]="foodItem.carbsPerGram"/>
+      <input id="carbsPerGram" name="carbsPerGram" type="number" min="0" step="0.1" [(ngModel)]="detailItem.carbsPerGram"/>
       <label for="fatPerGram">Fat</label>
-      <input id="fatPerGram" name="fatPerGram" type="number" min="0" step="0.1" [(ngModel)]="foodItem.fatPerGram"/>
+      <input id="fatPerGram" name="fatPerGram" type="number" min="0" step="0.1" [(ngModel)]="detailItem.fatPerGram"/>
       <label for="proteinPerGram">Protein</label>
-      <input id="proteinPerGram" name="proteinPerGram" type="number" min="0" step="0.1" [(ngModel)]="foodItem.proteinPerGram"/>
+      <input id="proteinPerGram" name="proteinPerGram" type="number" min="0" step="0.1" [(ngModel)]="detailItem.proteinPerGram"/>
     </form>
   </div>
 </div>

@@ -1,33 +1,24 @@
-import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
+import { Component } from '@angular/core';
 
 import { Column } from 'app/shared/table/table.component';
 import { ExerciseItem } from '../exercise-item';
 import { ExerciseItemService } from '../exercise-item.service';
+import { ListBase } from 'app/shared/model/list-base';
 
 @Component({
   selector: 'app-exercise-item-list',
-  templateUrl: './exercise-item-list.component.html',
-  styleUrls: ['./exercise-item-list.component.css']
+  templateUrl: './exercise-item-list.component.html'
 })
-export class ExerciseItemListComponent implements OnInit {
+export class ExerciseItemListComponent extends ListBase<ExerciseItem> {
 
-  viewRecord: ExerciseItem;
-  exerciseItems: Observable<ExerciseItem[]>;
-  columns: Column[];
+  constructor(protected crudService: ExerciseItemService) {
+    super(crudService);
+  }
 
-  constructor(
-    private exerciseItemService: ExerciseItemService) { }
-
-  ngOnInit() {
-    this.exerciseItems = this.exerciseItemService.list();
+  initColumns(): void {
     this.columns = [
       new Column('name', 'Name'),
       new Column('calsPerHour', 'Burn Rate', '25%', v => v + ' kCal/hr')
     ];
-  }
-
-  onRowClicked(exerciseItem: ExerciseItem): void {
-    this.viewRecord = exerciseItem;
   }
 }

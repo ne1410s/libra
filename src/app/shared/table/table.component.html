@@ -5,6 +5,10 @@
     <div class="cell" *ngFor="let column of columns" [style.flexBasis]="column.preferredWidth">
       <p>{{ column.name }}</p>
     </div>
+    <div *ngIf="showDelete" class="delete cell">
+      <i class="fa fa-plus-square add" (click)="addClicked()"></i>
+      <span class="sr-only">Add</span>
+    </div>
   </div>
 
   <div class="row" *ngIf="!(records | async)">
@@ -20,6 +24,10 @@
   <div class="row" *ngFor="let record of records | async" (click)="rowClicked(record)">
     <div class="cell" *ngFor="let column of columns" [style.flexBasis]="column.preferredWidth">
       <p>{{ column.getValue(record) }}</p>
+    </div>
+    <div *ngIf="showDelete" class="delete cell">
+      <i class="fa fa-trash-o del" (click)="$event.stopPropagation(); deleteClicked(record)"></i>
+      <span class="sr-only">Delete</span>
     </div>
   </div>
 </div>
