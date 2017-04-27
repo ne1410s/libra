@@ -11,7 +11,7 @@
         <label for="minutes">Time</label>
         <input class="small" id="minutes" name="minutes" type="number" step="1" min="0"
               [(ngModel)]="detailItem.minutes"/>
-        <span>minutes</span>
+        <span>mins  <i>({{ (detailItem.entity.calsPerHour * detailItem.minutes / 60).toFixed() }} kCal)</i></span>
       </div>
       <div class="row">
         <label for="recorded">Date</label>
