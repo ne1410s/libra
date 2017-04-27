@@ -63,7 +63,7 @@ export abstract class DateCrudService<T extends DateRecord> extends CrudService<
     return [start, end];
   }
 
-  constructor(protected http: Http) {
+  constructor(http: Http) {
     super(http);
   }
 
