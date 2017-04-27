@@ -1,10 +1,15 @@
 <div class="detail">
   <div *ngIf="detailItem">
-    <form>
-      <label for="name">Name</label>
-      <input id="name" name="name" type="text" [(ngModel)]="detailItem.name"/>
-      <label for="calsPerHour">Cals</label>
-      <input id="calsPerHour" name="calsPerHour" type="number" min="0" step="10" [(ngModel)]="detailItem.calsPerHour"/>
-    </form>
+    <div class="table">
+      <div class="row">
+        <label for="name">Name</label>
+        <input id="name" name="name" type="text" [(ngModel)]="detailItem.name"/>
+      </div>
+      <div class="row">
+        <label for="calsPerHour">Burn</label>
+        <input class="small" id="calsPerHour" name="calsPerHour" type="number" min="0" step="10" [(ngModel)]="detailItem.calsPerHour"/>
+        <span>kCal/hr</span>
+      </div>
+    </div>
   </div>
 </div>

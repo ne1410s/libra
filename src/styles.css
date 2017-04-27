@@ -1,8 +1,16 @@
-body, input, select, textarea, a {
+body, input, select, textarea, a:not(.fa) {
     font-size: 18px;
     font-family: 'Raleway';
     background-color: #333;
     color: #fff;
+}
+
+a.fa {
+    color: #fff;
+}
+
+input {
+    border: 1px solid #ccc;
 }
 
 h1, h2, h3, h4, h5, h6, p, body, ul { 

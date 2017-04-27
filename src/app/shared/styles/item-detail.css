@@ -1,1 +1,32 @@
-* { color: blue; }
+.detail .table .row {
+    display: flex;
+    align-items: center;
+    margin: .2em 0;
+    color: #333;
+}
+
+.detail .table .row > *:first-child {
+    width: 60px;
+    font-weight: bold;
+    text-align: right;
+    padding-right: .5em;
+}
+
+input, select, button {
+    border: 0;
+    padding: .4em;
+    border-radius: 3px;
+    box-sizing: border-box;
+}
+
+input {
+    width: 230px;
+}
+
+input.small {
+    width: 100px;
+}
+
+.row > input + span {
+    padding-left: .5em;
+}

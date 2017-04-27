@@ -1,16 +1,30 @@
 <div class="detail">
   <div *ngIf="detailItem">
-    <form>
-      <label for="name">Name</label>
-      <input id="name" name="name" type="text" [(ngModel)]="detailItem.name"/>
-      <label for="calsPerGram">Cals</label>
-      <input id="calsPerGram" name="calsPerGram" type="number" min="0" step="0.1" [(ngModel)]="detailItem.calsPerGram"/>
-      <label for="carbsPerGram">Carbs</label>
-      <input id="carbsPerGram" name="carbsPerGram" type="number" min="0" step="0.1" [(ngModel)]="detailItem.carbsPerGram"/>
-      <label for="fatPerGram">Fat</label>
-      <input id="fatPerGram" name="fatPerGram" type="number" min="0" step="0.1" [(ngModel)]="detailItem.fatPerGram"/>
-      <label for="proteinPerGram">Protein</label>
-      <input id="proteinPerGram" name="proteinPerGram" type="number" min="0" step="0.1" [(ngModel)]="detailItem.proteinPerGram"/>
-    </form>
+    <div class="table">
+      <div class="row">
+        <label for="name">Name</label>
+        <input id="name" name="name" type="text" [(ngModel)]="detailItem.name"/>
+      </div>
+      <div class="row">
+        <label for="calsPerGram">Energy</label>
+        <input class="small" id="calsPerGram" name="calsPerGram" type="number" min="0" step="0.1" [(ngModel)]="detailItem.calsPerGram"/>
+        <span>kCal/g</span>
+      </div>
+      <div class="row">
+        <label for="carbsPerGram">Carbs</label>
+        <input class="small" id="carbsPerGram" name="carbsPerGram" type="number" min="0" step="0.1" [(ngModel)]="detailItem.carbsPerGram"/>
+        <span>g/g</span>
+      </div>
+      <div class="row">
+        <label for="fatPerGram">Fat</label>
+        <input class="small" id="fatPerGram" name="fatPerGram" type="number" min="0" step="0.1" [(ngModel)]="detailItem.fatPerGram"/>
+        <span>g/g</span>
+      </div>
+      <div class="row">
+        <label for="proteinPerGram">Prot</label>
+        <input class="small" id="proteinPerGram" name="proteinPerGram" type="number" min="0" step="0.1" [(ngModel)]="detailItem.proteinPerGram"/>
+        <span>g/g</span>
+      </div>
+    </div>
   </div>
 </div>

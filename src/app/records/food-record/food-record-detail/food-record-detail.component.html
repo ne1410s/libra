@@ -1,15 +1,23 @@
 <div class="detail">
   <div *ngIf="detailItem">
-    <form>
-      <select name="entity" [(ngModel)]="detailItem.entity">
-        <option *ngFor="let option of entityList | async" [ngValue]="option">{{option.name}}</option>
-      </select>
-      <label for="grams">Mass</label>
-      <input id="grams" name="grams" type="number" step="0.1" min="0"
-            [(ngModel)]="detailItem.grams"/>
-      <input id="recorded" name="recorded" type="datetime-local"
-            [ngModel]="detailItem.recorded | date:'yyyy-MM-ddTHH:mm'" 
-            (ngModelChange)="detailItem.recorded = $event;"/>
-    </form>
+    <div class="table">
+      <div class="row">
+        <label for="entity">Item</label>
+        <select name="entity" [(ngModel)]="detailItem.entity">
+          <option *ngFor="let option of entityList | async" [ngValue]="option">{{option.name}}</option>
+        </select>
+      </div>
+      <div class="row">
+        <label for="grams">Mass</label>
+        <input class="small" id="grams" name="grams" type="number" step="0.1" min="0"
+              [(ngModel)]="detailItem.grams"/>
+        <span>g  <i>({{ (detailItem.entity.calsPerGram * detailItem.grams).toFixed() }} kCal)</i></span>
+      </div>
+      <div class="row">
+        <label for="recorded">Date</label>
+        <input id="recorded" name="recorded" type="datetime-local"
+              [ngModel]="detailItem.recorded | date:'yyyy-MM-ddTHH:mm'" 
+              (ngModelChange)="detailItem.recorded = $event;"/>
+      </div>
   </div>
 </div>

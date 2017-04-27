@@ -32,8 +32,8 @@
   </div>
 
   <div class="new row" *ngIf="newRecord" (click)="rowClicked(newRecord)">
-    <div class="cell" *ngFor="let column of columns" [style.flexBasis]="column.preferredWidth">
-      <p>New!</p>
+    <div class="cell">
+      <p><i>Click here to add details...</i></p>
     </div>
     <div class="delete cell">
       <i class="fa fa-trash-o del" (click)="$event.stopPropagation(); newRecord = null"></i>
