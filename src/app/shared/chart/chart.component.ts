@@ -54,6 +54,8 @@ export class ChartComponent implements OnInit {
 
   /** Entrusts the service with caching, etc. */
   applyRangeFilter(): void {
+    this.outCals = -1;
+    this.inCals = -1;
     this.chartOptions = this.chartConfigService.getOptions(this.periodDescription, this.period, this.offset);
 
     this.massRecordService
@@ -61,24 +63,24 @@ export class ChartComponent implements OnInit {
       .subscribe(items => {
         this.chartData = [{
           data: items.map(m => { return { x: m.recorded, y: m.kilos }; }),
-          label: 'Mass'
+          label: 'Mass',
         }];
       });
 
     this.exerciseRecordService
       .listForPeriod(this.period, this.offset)
       .subscribe(items => {
-        this.outCals = items.reduce((tot, cur) => {
+        this.outCals = Math.round(items.reduce((tot, cur) => {
           return tot + cur.entity.calsPerHour * cur.minutes / 60;
-        }, 0);
+        }, 0));
       });
 
     this.foodRecordService
       .listForPeriod(this.period, this.offset)
       .subscribe(items => {
-        this.inCals = items.reduce((tot, cur) => {
+        this.inCals = Math.round(items.reduce((tot, cur) => {
           return tot + cur.entity.calsPerGram * cur.grams;
-        }, 0);
+        }, 0));
       });
   }
 }

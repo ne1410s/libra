@@ -2,3 +2,15 @@
     margin: auto;
     max-width: 720px;
 }
+
+.stats > div {
+    display: flex;
+    max-width: 360px;
+    justify-content: center;
+    margin: auto;
+}
+
+.stats .result p {
+    margin: 1em;
+    text-align: center;
+}

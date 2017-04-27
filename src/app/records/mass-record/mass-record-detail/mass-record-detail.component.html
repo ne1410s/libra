@@ -8,6 +8,12 @@
         <span>kg</span>
       </div>
       <div class="row">
+        <span></span>
+        <span>{{ detailItem.kilos | mass: 'lb' }}</span>
+        <span class="or">or</span>
+        <span>{{ detailItem.kilos | mass: 'st' }}</span>
+      </div>
+      <div class="row">
         <label for="recorded">Date</label>
         <input id="recorded" name="recorded" type="datetime-local"
             [ngModel]="detailItem.recorded | date:'yyyy-MM-ddTHH:mm'" 

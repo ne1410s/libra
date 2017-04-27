@@ -30,3 +30,8 @@ input.small {
 .row > input + span {
     padding-left: .5em;
 }
+
+.or {
+    padding: 0 .5em;
+    font-weight: bold;
+}

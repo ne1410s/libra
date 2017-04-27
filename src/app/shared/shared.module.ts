@@ -13,6 +13,7 @@ import { DateRangePickerComponent } from './date-range-picker/date-range-picker.
 import { ChartConfigService } from './chart/chart-config.service';
 import { TableComponent } from './table/table.component';
 import { PopupComponent } from './popup/popup.component';
+import { MassConverterPipe } from './pipes/mass-converter.pipe';
 
 const USE_MOCK_HTTP = true;
 
@@ -29,16 +30,19 @@ const USE_MOCK_HTTP = true;
     DateRangePickerComponent,
     TableComponent,
     PopupComponent,
+    MassConverterPipe,
   ],
   exports: [
     NotFoundComponent,
     ChartComponent,
     DateRangePickerComponent,
     TableComponent,
+    MassConverterPipe
   ],
   providers: [
     QueryStringService,
-    ChartConfigService
+    ChartConfigService,
+    MassConverterPipe
   ]
 })
 export class SharedModule { }

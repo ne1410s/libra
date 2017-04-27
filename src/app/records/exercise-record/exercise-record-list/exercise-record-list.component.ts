@@ -23,7 +23,7 @@ export class ExerciseRecordListComponent extends ListBase<ExerciseRecord> {
       }),
       new Column('entity', 'Exercise', '15%', v => v.name),
       new Column('minutes', 'Duration', '15%', v => v + ' mins'),
-      new Column('minutes', 'Cals', '10%', (v, o) => (o.entity.calsPerHour * o.minutes / 60).toFixed(0))
+      new Column('minutes', 'Cals', '10%', (v, o) => (o.entity.calsPerHour * o.minutes / 60).toFixed())
     ];
   }
 }
