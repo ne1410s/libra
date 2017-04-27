@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 import { EntityDetail } from 'app/shared/model/entity-detail';
 import { ExerciseItem } from 'app/items/exercise-item/exercise-item';

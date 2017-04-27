@@ -15,6 +15,12 @@ export class EntityDetail<R extends EntityRecord<E>, E extends Record> extends D
         super();
     }
 
+    updateEntity(id: number): void {
+        this.entityList.subscribe(items => {
+            this.detailItem.entity = items.find(item => item.id === id);
+        });
+    }
+
     ngOnInit(): void {
         this.entityList = this.crudService.list();
     }

@@ -3,8 +3,8 @@
     <div class="table">
       <div class="row">
         <label for="entity">Item</label>
-        <select name="entity" [(ngModel)]="detailItem.entity">
-          <option *ngFor="let option of entityList | async" [ngValue]="option">{{option.name}}</option>
+        <select name="entity" [ngModel]="detailItem.entity.id" (ngModelChange)="updateEntity($event)">
+          <option *ngFor="let option of entityList | async" [ngValue]="option.id">{{ option.name }}</option>
         </select>
       </div>
       <div class="row">

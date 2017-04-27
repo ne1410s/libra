@@ -24,8 +24,6 @@ export class PopupComponent implements OnInit {
 
   popState: string;
 
-  constructor() { }
-
   closePopup(event: MouseEvent): void {
     this.onPopupClosed.emit(event);
   }
