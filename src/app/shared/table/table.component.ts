@@ -33,6 +33,15 @@ export class TableComponent implements OnInit {
     this.viewRecord = record;
   }
 
+  sortBy(column: Column) {
+    this.records.subscribe(items => {
+      items.sort((a, b) => a['name'] < b['name'] ? -1 : a['name'] > b['name'] ? 1 : 0);
+
+      // TODO: Fix sorting!
+      console.warn('Well the items are sorted by name now...');
+    });
+  }
+
   addClicked(): void {
     this.newRecord = { id: -1 };
   }

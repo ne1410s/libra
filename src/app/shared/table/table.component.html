@@ -3,7 +3,7 @@
 <div class="table" [style.maxWidth]="maxWidth">
   <div class="header row">
     <div class="cell" *ngFor="let column of columns" [style.flexBasis]="column.preferredWidth">
-      <p>{{ column.name }}</p>
+      <p (click)="sortBy(column)">{{ column.name }}</p>
     </div>
     <div *ngIf="showDelete" class="delete cell">
       <i class="fa fa-plus-square add" (click)="addClicked()"></i>
