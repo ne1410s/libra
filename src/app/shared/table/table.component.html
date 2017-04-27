@@ -17,7 +17,7 @@
       <span class="sr-only">Loading...</span>
     </div>
   </div>
-  <div class="row" *ngIf="(records | async) && records.length">
+  <div class="row" *ngIf="(records | async) && (records | async)?.length == 0">
     <div class="cell"><p>No records found :(</p></div>
   </div>
 

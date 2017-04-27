@@ -6,9 +6,9 @@ import { CrudService } from './crud-service.service';
 import { Column } from 'app/shared/table/table.component';
 
 export abstract class ListBase<T extends Record> implements OnInit {
-    protected viewRecord: T;
-    protected allRecords: Observable<T[]>;
-    protected columns: Column[];
+    viewRecord: T;
+    allRecords: Observable<T[]>;
+    columns: Column[];
 
     constructor(protected crudService: CrudService<T>) { }
 
