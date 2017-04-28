@@ -3,7 +3,7 @@ import { Observable } from 'rxjs/Observable';
 
 import { Record } from './record';
 import { CrudService } from './crud-service.service';
-import { Column } from 'app/shared/table/table.component';
+import { Column, SortMode } from 'app/shared/table/table.component';
 
 export abstract class ListBase<T extends Record> implements OnInit {
     viewRecord: T;
@@ -15,8 +15,11 @@ export abstract class ListBase<T extends Record> implements OnInit {
     abstract initColumns(): void;
 
     init() {
-        this.allRecords = this.crudService.list();
         this.initColumns();
+        this.allRecords = this.crudService.list().map(recs => {
+            this.columns.forEach(c => c.sortMode = SortMode.None);
+            return this.columns[0].sortRecords(recs);
+        });
     }
 
     ngOnInit() {
@@ -33,10 +36,22 @@ export abstract class ListBase<T extends Record> implements OnInit {
     }
 
     onPopupClosed(record: T): void {
+
+        // Escape where unchanged record
+        if (!record.__dirty) { return; }
+
         const wasNew = record.id === -1;
         this.crudService.save(record).subscribe(() => {
             this.viewRecord = null;
         });
+
+        // Rebuild the list (for new records only)
         if (wasNew) { this.allRecords = this.crudService.list(); }
+
+        // Apply default ordering (new and edited records alike)
+        this.allRecords = this.allRecords.map(recs => {
+            this.columns.forEach(c => c.sortMode = SortMode.None);
+            return this.columns[0].sortRecords(recs);
+        });
     }
 }

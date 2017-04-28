@@ -2,8 +2,9 @@
 
 <div class="table" [style.maxWidth]="maxWidth">
   <div class="header row">
-    <div class="cell" *ngFor="let column of columns" [style.flexBasis]="column.preferredWidth">
-      <p (click)="sortBy(column)">{{ column.name }}</p>
+    <div class="cell" *ngFor="let column of columns" [style.flexBasis]="column.preferredWidth" (click)="sortBy(column)">
+      <p>{{ column.name }}</p>
+      <span class="sort fa fa-sort-{{ column.sortMode == 1 ? 'desc' : column.sortMode == 2 ? 'asc' : ''}}"></span>
     </div>
     <div *ngIf="showDelete" class="delete cell">
       <i class="fa fa-plus-square add" (click)="addClicked()"></i>

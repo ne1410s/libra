@@ -20,6 +20,8 @@ export class TableComponent implements OnInit {
   viewRecord: any;
   newRecord: any;
 
+  viewRecordCheck: string;
+
   ngOnInit(): void {
     this.records.subscribe(records => {
       if ((!this.columns || this.columns.length === 0) && records.length !== 0) {
@@ -31,14 +33,13 @@ export class TableComponent implements OnInit {
   rowClicked(record: any): void {
     this.onRowClicked.emit(record);
     this.viewRecord = record;
+    this.viewRecordCheck = JSON.stringify(record);
   }
 
   sortBy(column: Column) {
-    this.records.subscribe(items => {
-      items.sort((a, b) => a['name'] < b['name'] ? -1 : a['name'] > b['name'] ? 1 : 0);
-
-      // TODO: Fix sorting!
-      console.warn('Well the items are sorted by name now...');
+    this.records = this.records.map(recs => {
+      this.columns.forEach(c => c.sortMode = c.displayName === column.displayName ? column.sortMode : SortMode.None);
+      return column.sortRecords(recs);
     });
   }
 
@@ -52,12 +53,18 @@ export class TableComponent implements OnInit {
 
   popupClosed(event: any): void {
     this.newRecord = null;
+    this.viewRecord.__dirty = JSON.stringify(this.viewRecord) !== this.viewRecordCheck;
     this.onPopupClosed.emit(this.viewRecord);
     this.viewRecord = null;
+    this.viewRecordCheck = null;
   }
 }
 
+export enum SortMode { None, Ascending, Descending }
+
 export class Column {
+
+  sortMode: SortMode = SortMode.None;
 
   getValue(rowObject: any, noValue: string = '---'): any {
     const retVal = rowObject[this.objectKey];
@@ -67,6 +74,22 @@ export class Column {
 
   get name(): string {
     return this.displayName || this.objectKey;
+  }
+
+  sortRecords(records: any[]): any[] {
+
+    // Determine new mode to apply
+    switch (this.sortMode) {
+      case SortMode.Ascending:
+        this.sortMode = SortMode.Descending;
+        break;
+      default:
+        this.sortMode = SortMode.Ascending;
+    }
+
+    records.sort((a, b) => a[this.objectKey] < b[this.objectKey] ? -1 : a[this.objectKey] > b[this.objectKey] ? 1 : 0);
+    if (this.sortMode === SortMode.Descending) { records.reverse(); };
+    return records;
   }
 
   constructor(

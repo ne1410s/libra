@@ -8,49 +8,66 @@ h4 {
     margin: auto;
 }
 
-.table .row {
+.row {
     display: flex;
 }
 
-.table .row:not(.header):nth-child(2n + 1) {
+.row:not(.header):nth-child(2n + 1) {
     color: #333;
     background-color: #fff;
 }
 
-.table .row:not(.header):hover {
+.row:not(.header):hover {
     color: #fff;
     background-color: rgba(0, 70, 0, .6);
 }
 
-.table .header.row {
+.header.row {
     font-weight: bold;
     text-align: center;
     background-color: #777;
     color: #fff;
 }
 
-.table .row:not(.header) > .cell:not(:first-of-type) {
+.header.row > .cell {
+    position: relative;
+    cursor: pointer;
+}
+
+.header.row > .cell:hover {
+    background-color: #666;
+}
+
+.header.row > .cell > span.sort {
+    color: #00c000;
+    position: absolute;
+    right: .5em;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.row:not(.header) > .cell:not(:first-of-type) {
     border-left: 1px dashed #ccc;
 }
 
-.table .row > .cell {
+.row > .cell {
     padding: .7em;
     flex: 25% 1 1;
     cursor: default;
 }
 
-.table p {
+p {
     margin: 0;
 }
 
-.table .loading.cell {
+.loading.cell {
     color: #006400;
     text-align: center;
     padding: 2em 0;
     background-color: #333;
 }
 
-.table .row > .delete.cell {
+.row > .delete.cell {
     text-align: center;
     flex: 20px 0 0;
 }
