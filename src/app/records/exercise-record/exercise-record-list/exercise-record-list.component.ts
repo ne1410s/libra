@@ -3,13 +3,13 @@ import { Component } from '@angular/core';
 import { Column } from 'app/shared/table/table.component';
 import { ExerciseRecord } from '../exercise-record';
 import { ExerciseRecordService } from '../exercise-record.service';
-import { ListBase } from 'app/shared/model/list-base';
+import { DateListBase } from 'app/shared/model/date-list-base';
 
 @Component({
   selector: 'app-exercise-record-list',
   templateUrl: './exercise-record-list.component.html'
 })
-export class ExerciseRecordListComponent extends ListBase<ExerciseRecord> {
+export class ExerciseRecordListComponent extends DateListBase<ExerciseRecord> {
 
   constructor(protected crudService: ExerciseRecordService) {
     super(crudService);

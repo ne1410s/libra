@@ -16,6 +16,7 @@ export class TableComponent implements OnInit {
   @Output() onRowClicked = new EventEmitter<any>();
   @Output() onDeleteClicked = new EventEmitter<any>();
   @Output() onPopupClosed = new EventEmitter<any>();
+  @Output() onRecordCreated = new EventEmitter<any>();
 
   viewRecord: any;
   newRecord: any;
@@ -45,6 +46,10 @@ export class TableComponent implements OnInit {
 
   addClicked(): void {
     this.newRecord = { id: -1 };
+    this.onRecordCreated.emit(this.newRecord);
+
+    // Simulate a row click to raise the dialog immediately
+    this.rowClicked(this.newRecord);
   }
 
   deleteClicked(record: any): void {

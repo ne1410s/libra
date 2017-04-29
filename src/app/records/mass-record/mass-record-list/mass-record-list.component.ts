@@ -4,13 +4,13 @@ import { Column } from 'app/shared/table/table.component';
 import { MassRecord } from '../mass-record';
 import { MassRecordService } from '../mass-record.service';
 import { MassConverterPipe } from 'app/shared/pipes/mass-converter.pipe';
-import { ListBase } from 'app/shared/model/list-base';
+import { DateListBase } from 'app/shared/model/date-list-base';
 
 @Component({
   selector: 'app-mass-record-list',
   templateUrl: './mass-record-list.component.html'
 })
-export class MassRecordListComponent extends ListBase<MassRecord> {
+export class MassRecordListComponent extends DateListBase<MassRecord> {
 
   constructor(
       protected crudService: MassRecordService,
@@ -20,10 +20,6 @@ export class MassRecordListComponent extends ListBase<MassRecord> {
   }
 
   initColumns(): void {
-
-    const xx: any = 42;
-    const x = this.massPipe.transform(xx, 'kg');
-
     this.columns = [
       new Column('recorded', 'Recorded On', '33%', v => {
         const recorded = new Date(v);

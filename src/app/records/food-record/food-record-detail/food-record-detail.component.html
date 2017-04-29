@@ -3,7 +3,7 @@
     <div class="table">
       <div class="row">
         <label for="entity">Item</label>
-        <select name="entity" [ngModel]="detailItem.entity.id" (ngModelChange)="updateEntity($event)">
+        <select name="entity" [ngModel]="detailItem.entity?.id" (ngModelChange)="updateEntity($event)">
           <option *ngFor="let option of entityList | async" [ngValue]="option.id">{{ option.name }}</option>
         </select>
       </div>
@@ -11,7 +11,7 @@
         <label for="grams">Mass</label>
         <input class="small" id="grams" name="grams" type="number" step="0.1" min="0"
               [(ngModel)]="detailItem.grams"/>
-        <span>g  <i>({{ (detailItem.entity.calsPerGram * detailItem.grams).toFixed() }} kCal)</i></span>
+        <span>g  <i>({{ (detailItem.entity?.calsPerGram * detailItem.grams).toFixed() }} kCal)</i></span>
       </div>
       <div class="row">
         <label for="recorded">Date</label>

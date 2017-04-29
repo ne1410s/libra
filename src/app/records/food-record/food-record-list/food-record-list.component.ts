@@ -3,13 +3,13 @@ import { Component } from '@angular/core';
 import { Column } from 'app/shared/table/table.component';
 import { FoodRecord } from '../food-record';
 import { FoodRecordService } from '../food-record.service';
-import { ListBase } from 'app/shared/model/list-base';
+import { DateListBase } from 'app/shared/model/date-list-base';
 
 @Component({
   selector: 'app-food-record-list',
   templateUrl: './food-record-list.component.html'
 })
-export class FoodRecordListComponent extends ListBase<FoodRecord> {
+export class FoodRecordListComponent extends DateListBase<FoodRecord> {
 
   constructor(protected crudService: FoodRecordService) {
     super(crudService);

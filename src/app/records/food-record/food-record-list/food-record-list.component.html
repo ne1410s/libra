@@ -4,7 +4,8 @@
         maxWidth="600px"
         (onRowClicked)="onRowClicked($event)"
         (onDeleteClicked)="onDeleteClicked($event)"
-        (onPopupClosed)="onPopupClosed($event)">
+        (onPopupClosed)="onPopupClosed($event)"
+        (onRecordCreated)="onRecordCreated($event)">
     
     <app-food-record-detail [detailItem]="viewRecord"></app-food-record-detail>
 </app-table>
