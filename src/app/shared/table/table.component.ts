@@ -1,5 +1,7 @@
 import { Component, EventEmitter, Input, Output, OnInit } from '@angular/core';
+
 import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/operator/do';
 
 @Component({
   selector: 'app-table',
@@ -24,7 +26,7 @@ export class TableComponent implements OnInit {
   viewRecordCheck: string;
 
   ngOnInit(): void {
-    this.records.subscribe(records => {
+    this.records.do(records => {
       if ((!this.columns || this.columns.length === 0) && records.length !== 0) {
         this.columns = Object.keys(records[0]).map(k => new Column(k));
       }
