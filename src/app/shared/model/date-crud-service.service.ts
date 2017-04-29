@@ -14,7 +14,7 @@ export enum Period { Week, Month, Year }
 @Injectable()
 export abstract class DateCrudService<T extends DateRecord> extends CrudService<T> {
 
-  private allRecordsCache: Observable<T[]>;
+  protected allRecordsCache: Observable<T[]>;
 
   public static getDates(period: Period, offset: number, tolerance = 0): [Date, Date] {
     switch (period) {
@@ -83,7 +83,7 @@ export abstract class DateCrudService<T extends DateRecord> extends CrudService<
     });
   }
 
-  private rangeFilter(item: T, start: Date, end: Date): boolean {
+  protected rangeFilter(item: T, start: Date, end: Date): boolean {
     const recorded = new Date(item.recorded);
     return recorded >= start && recorded <= end;
   }
