@@ -23,7 +23,7 @@ export class TableComponent implements OnInit {
   viewRecord: any;
   newRecord: any;
 
-  viewRecordCheck: string;
+  valueCheck: string;
 
   ngOnInit(): void {
     this.records.do(records => {
@@ -36,7 +36,7 @@ export class TableComponent implements OnInit {
   rowClicked(record: any): void {
     this.onRowClicked.emit(record);
     this.viewRecord = record;
-    this.viewRecordCheck = JSON.stringify(record);
+    this.valueCheck = JSON.stringify(record, (key, val) => { return key !== 'entity' ? val : null; });
   }
 
   sortBy(column: Column) {
@@ -60,10 +60,11 @@ export class TableComponent implements OnInit {
 
   popupClosed(event: any): void {
     this.newRecord = null;
-    this.viewRecord.__dirty = JSON.stringify(this.viewRecord) !== this.viewRecordCheck;
+    const recordJson = JSON.stringify(this.viewRecord, (key, val) => { return key !== 'entity' ? val : null; });
+    this.viewRecord.__dirty = recordJson !== this.valueCheck;
     this.onPopupClosed.emit(this.viewRecord);
     this.viewRecord = null;
-    this.viewRecordCheck = null;
+    this.valueCheck = null;
   }
 }
 

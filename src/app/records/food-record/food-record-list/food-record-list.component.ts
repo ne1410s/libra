@@ -21,9 +21,9 @@ export class FoodRecordListComponent extends DateListBase<FoodRecord> {
         const recorded = new Date(v);
         return recorded.toLocaleDateString() + ' @ ' + recorded.toLocaleTimeString();
       }),
-      new Column('entity', 'Food', '15%', v => v.name),
+      new Column('cacheEntity', 'Food', '15%', v => v.name),
       new Column('grams', 'Mass', '15%', v => v + ' g'),
-      new Column('grams', 'Cals', '10%', (v, o) => (o.entity.calsPerGram * o.grams).toFixed())
+      new Column('cacheEntity', 'Cals', '10%', (v, o) => (v.calsPerGram * o.grams).toFixed())
     ];
   }
 }

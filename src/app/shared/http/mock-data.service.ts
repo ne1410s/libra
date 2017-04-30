@@ -18,20 +18,6 @@ export class MockDataService implements InMemoryDbService {
 
   createDb() {
 
-    const foods: FoodItem[] = [
-      new FoodItem('Bread', 3),
-      new FoodItem('Cheese', 5)
-    ];
-
-    const foodRecords: FoodRecord[] = [
-      new FoodRecord(foods[0], 12),
-      new FoodRecord(foods[1], 400),
-    ];
-
-    const recipes: Recipe[] = [
-      // TODO!
-    ];
-
     const exercises: ExerciseItem[] = [
       new ExerciseItem('Walking', 150),
       new ExerciseItem('Jogging', 600),
@@ -39,9 +25,9 @@ export class MockDataService implements InMemoryDbService {
       new ExerciseItem('Sprinting', 1000)
     ];
 
-    const exerciseRecords: ExerciseRecord[] = [
-      new ExerciseRecord(exercises[0], 165),
-      new ExerciseRecord(exercises[1], 20),
+    const foods: FoodItem[] = [
+      new FoodItem('Bread', 3),
+      new FoodItem('Cheese', 5)
     ];
 
     const massRecords: MassRecord[] = [
@@ -49,12 +35,27 @@ export class MockDataService implements InMemoryDbService {
       new MassRecord(96.343, new Date(2017, 3, 21, 7, 30)),
     ];
 
-    MockDataService.applyIncrementalIds(foods);
-    MockDataService.applyIncrementalIds(foodRecords);
-    MockDataService.applyIncrementalIds(recipes);
     MockDataService.applyIncrementalIds(exercises);
-    MockDataService.applyIncrementalIds(exerciseRecords);
+    MockDataService.applyIncrementalIds(foods);
     MockDataService.applyIncrementalIds(massRecords);
+
+    const recipes: Recipe[] = [
+      // TODO!
+    ];
+
+    const exerciseRecords: ExerciseRecord[] = [
+      new ExerciseRecord(1, 165),
+      new ExerciseRecord(2, 20),
+    ];
+
+    const foodRecords: FoodRecord[] = [
+      new FoodRecord(1, 12),
+      new FoodRecord(2, 400),
+    ];
+
+    MockDataService.applyIncrementalIds(recipes);
+    MockDataService.applyIncrementalIds(exerciseRecords);
+    MockDataService.applyIncrementalIds(foodRecords);
 
     return {
       foodRecords: foodRecords,

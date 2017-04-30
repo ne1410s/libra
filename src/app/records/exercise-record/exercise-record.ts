@@ -4,10 +4,10 @@ import { ExerciseItem } from 'app/items/exercise-item/exercise-item';
 export class ExerciseRecord extends EntityRecord<ExerciseItem> {
 
     constructor(
-            public entity: ExerciseItem,
+            public entityId: number,
             public minutes: number,
             recorded?: Date) {
 
-        super(entity, recorded);
+        super(entityId, recorded);
     }
 }

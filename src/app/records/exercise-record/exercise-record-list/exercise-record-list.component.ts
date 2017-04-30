@@ -21,9 +21,9 @@ export class ExerciseRecordListComponent extends DateListBase<ExerciseRecord> {
         const recorded = new Date(v);
         return recorded.toLocaleDateString() + ' @ ' + recorded.toLocaleTimeString();
       }),
-      new Column('entity', 'Exercise', '15%', v => v.name),
+      new Column('cacheEntity', 'Exercise', '15%', v => v.name),
       new Column('minutes', 'Duration', '15%', v => v + ' mins'),
-      new Column('minutes', 'Cals', '10%', (v, o) => (o.entity.calsPerHour * o.minutes / 60).toFixed())
+      new Column('cacheEntity', 'Cals', '10%', (v, o) => (v.calsPerHour * o.minutes / 60).toFixed())
     ];
   }
 }

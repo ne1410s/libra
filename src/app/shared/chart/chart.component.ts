@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/observable/forkJoin';
 
 import { DateCrudService, Period } from 'app/shared/model/date-crud-service.service';
 import { ExerciseRecord } from 'app/records/exercise-record/exercise-record';
@@ -69,18 +70,24 @@ export class ChartComponent implements OnInit {
 
     this.exerciseRecordService
       .listForPeriod(this.period, this.offset)
-      .subscribe(items => {
-        this.outCals = Math.round(items.reduce((tot, cur) => {
-          return tot + cur.entity.calsPerHour * cur.minutes / 60;
-        }, 0));
+      .subscribe(records => {
+        Observable.forkJoin(records.map(i => i.entity)).subscribe(items => {
+          this.outCals = Math.round(records.reduce((tot, cur, i) => {
+            const entity = items.find(item => item.id === cur.entityId);
+            return tot + entity.calsPerHour * cur.minutes / 60;
+          }, 0));
+        });
       });
 
     this.foodRecordService
       .listForPeriod(this.period, this.offset)
-      .subscribe(items => {
-        this.inCals = Math.round(items.reduce((tot, cur) => {
-          return tot + cur.entity.calsPerGram * cur.grams;
-        }, 0));
+      .subscribe(records => {
+        Observable.forkJoin(records.map(i => i.entity)).subscribe(items => {
+          this.inCals = Math.round(records.reduce((tot, cur, i) => {
+            const entity = items.find(item => item.id === cur.entityId);
+            return tot + entity.calsPerGram * cur.grams;
+          }, 0));
+        });
       });
   }
 }

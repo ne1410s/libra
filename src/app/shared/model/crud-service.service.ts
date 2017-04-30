@@ -27,8 +27,9 @@ export abstract class CrudService<T extends Record> {
 
   insert(item: T): Observable<T> {
     const url = `${this.apiBase}/${this.apiEntityPath}`;
+    const valStr = JSON.stringify(item, (key, val) => { return key !== 'entity' ? val : null; });
     return this.http
-        .post(url, JSON.stringify(item), { headers: this.headers })
+        .post(url, valStr, { headers: this.headers })
         .map(res => res.json().data as T)
         .catch(CrudService.handleError);
   }
@@ -43,8 +44,9 @@ export abstract class CrudService<T extends Record> {
 
   update(item: T): Observable<T> {
     const url = `${this.apiBase}/${this.apiEntityPath}/${item.id}`;
+    const valStr = JSON.stringify(item, (key, val) => { return key !== 'entity' ? val : null; });
     return this.http
-        .put(url, JSON.stringify(item), { headers: this.headers })
+        .put(url, valStr, { headers: this.headers })
         .map(() => item)
         .catch(CrudService.handleError);
   }
