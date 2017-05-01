@@ -18,12 +18,12 @@ export class EntityDetail<R extends EntityRecord<E>, E extends Record> extends D
     }
 
     updateEntity(id: number): void {
+        this.detailItem.cacheEntity = {} as E;
+        this.detailItem.entityId = id;
         this.entityList.subscribe(items => {
-            this.detailItem.entity = Observable.of(items.find(item => item.id === id));
-            this.detailItem.entity.subscribe(ent => {
-                this.detailItem.cacheEntity = ent;
-                this.detailItem.entityId = ent.id;
-            });
+            const entity = items.find(item => item.id === id);
+            this.detailItem.entity = Observable.of(entity);
+            this.detailItem.cacheEntity = entity;
         });
     }
 
