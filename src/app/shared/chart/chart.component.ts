@@ -21,6 +21,8 @@ export class ChartComponent implements OnInit {
 
   public offset = 0;
   public period = Period.Year;
+  public yMin = 100;
+  public yMax = 100;
 
   public outCals: number;
   public inCals: number;
@@ -39,7 +41,12 @@ export class ChartComponent implements OnInit {
       private chartConfigService: ChartConfigService) { }
 
   ngOnInit(): void {
-    this.applyRangeFilter();
+    this.massRecordService.list().subscribe(items => {
+      const minMax = this.massRecordService.getMinMaxKilos(items);
+      this.yMin = minMax[0];
+      this.yMax = minMax[1];
+      this.applyRangeFilter();
+    });
   }
 
   onOffsetChanged(offset: number): void {
@@ -57,7 +64,8 @@ export class ChartComponent implements OnInit {
   applyRangeFilter(): void {
     this.outCals = -1;
     this.inCals = -1;
-    this.chartOptions = this.chartConfigService.getOptions(this.periodDescription, this.period, this.offset);
+    this.chartOptions = this.chartConfigService.getOptions(
+      this.periodDescription, this.period, this.offset, this.yMin, this.yMax);
 
     this.massRecordService
       .listForPeriod(this.period, this.offset, 1)
@@ -71,23 +79,31 @@ export class ChartComponent implements OnInit {
     this.exerciseRecordService
       .listForPeriod(this.period, this.offset)
       .subscribe(records => {
-        Observable.forkJoin(records.map(i => i.entity)).subscribe(items => {
-          this.outCals = Math.round(records.reduce((tot, cur, i) => {
-            const entity = items.find(item => item.id === cur.entityId);
-            return tot + entity.calsPerHour * cur.minutes / 60;
-          }, 0));
-        });
+        if (records.length === 0) {
+          this.outCals = 0;
+        } else {
+          Observable.forkJoin(records.map(i => i.entity)).subscribe(items => {
+            this.outCals = Math.round(records.reduce((tot, cur, i) => {
+              const entity = items.find(item => item.id === cur.entityId);
+              return tot + entity.calsPerHour * cur.minutes / 60;
+            }, 0));
+          });
+        }
       });
 
     this.foodRecordService
       .listForPeriod(this.period, this.offset)
       .subscribe(records => {
-        Observable.forkJoin(records.map(i => i.entity)).subscribe(items => {
-          this.inCals = Math.round(records.reduce((tot, cur, i) => {
-            const entity = items.find(item => item.id === cur.entityId);
-            return tot + entity.calsPerGram * cur.grams;
-          }, 0));
-        });
+        if (records.length === 0) {
+          this.inCals = 0;
+        } else {
+          Observable.forkJoin(records.map(i => i.entity)).subscribe(items => {
+            this.inCals = Math.round(records.reduce((tot, cur, i) => {
+              const entity = items.find(item => item.id === cur.entityId);
+              return tot + entity.calsPerGram * cur.grams;
+            }, 0));
+          });
+        }
       });
   }
 }

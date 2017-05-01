@@ -2,9 +2,24 @@
   <div>
     <h1>{{ heading }}</h1>
     <nav>
-      <a routerLink="/home" routerLinkActive="active">Home</a>
-      <a routerLink="/records" routerLinkActive="active">Records</a>
-      <a routerLink="/items" routerLinkActive="active">Items</a>
+      <ul>
+        <li><a routerLink="/home" routerLinkActive="active">Home</a></li>
+        <li>
+          <a routerLink="/records" routerLinkActive="active">Records</a>
+          <ul>
+            <li><a routerLink="/records/exercise" routerLinkActive="active">Exercise</a></li>
+            <li><a routerLink="/records/food" routerLinkActive="active">Food</a></li>
+            <li><a routerLink="/records/mass" routerLinkActive="active">Mass</a></li>
+          </ul>
+        </li>
+        <li>
+          <a routerLink="/items" routerLinkActive="active">Items</a>
+          <ul>
+            <li><a routerLink="/items/exercise" routerLinkActive="active">Exercise</a></li>
+            <li><a routerLink="/items/food" routerLinkActive="active">Food</a></li>
+          </ul>
+        </li>
+      </ul>
     </nav>
   </div>
 </header>

@@ -8,17 +8,45 @@ header {
     height: 80px;
 }
 
-nav {
-    margin-top: .5em;
+h1 + nav {
+    margin-top: .4em;
+}
+
+nav ul {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    list-style: none;
+    position: relative;
+}
+
+nav li {
+    width: 120px;
+}
+
+nav ul ul {
+    flex-wrap: wrap;
+    width: 100%;
+    opacity: 0.95;
 }
 
 nav a {
     padding: .2em .5em;
-    margin: 0 .5em;
+    text-decoration: none;
+    display: block;
+}
+
+nav a:hover {
+    background-color: #999;
 }
 
 nav a.active {
     background-color: #006400;
+    cursor: default;
+}
+
+nav li:not(:hover) ul {
+    display: none;
 }
 
 footer {

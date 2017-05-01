@@ -51,7 +51,7 @@ export class ChartConfigService {
     }
   };
 
-  getOptions(title: string, period: Period, offset: number): any {
+  getOptions(title: string, period: Period, offset: number, yMin: number, yMax: number): any {
 
     let timeUnit: string;
     switch (period) {
@@ -72,6 +72,8 @@ export class ChartConfigService {
     retVal.scales.xAxes[0].time.min = dates[0];
     retVal.scales.xAxes[0].time.max = dates[1];
     retVal.scales.xAxes[0].time.unit = timeUnit;
+    retVal.scales.yAxes[0].ticks.min = yMin;
+    retVal.scales.yAxes[0].ticks.max = yMax;
 
     return retVal;
   }

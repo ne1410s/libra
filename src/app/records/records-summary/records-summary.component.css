@@ -1,6 +1,6 @@
 nav {
     position: fixed;
-    top: 90px; right: 0;
+    top: 90px; left: 0;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
@@ -14,4 +14,16 @@ nav a {
 
 nav a.active {
     color: #006400;
+}
+
+@media (max-width: 767px) {
+    nav {
+        position: static;
+        width: 100%;
+    }
+
+    nav a {
+        margin: .3em;
+        width: 50px;
+    }
 }

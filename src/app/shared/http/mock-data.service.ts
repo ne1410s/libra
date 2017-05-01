@@ -31,7 +31,7 @@ export class MockDataService implements InMemoryDbService {
     ];
 
     const massRecords: MassRecord[] = [
-      new MassRecord(100, new Date(2017, 2, 22, 7, 30)),
+      new MassRecord(102.7, new Date(2017, 2, 22, 7, 30)),
       new MassRecord(96.343, new Date(2017, 3, 21, 7, 30)),
     ];
 

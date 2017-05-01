@@ -1,7 +1,7 @@
 .controls {
     display: flex;
     max-width: 720px;
-    padding: 2em 0;
+    padding: 1em 0 0;
     margin: auto;
     justify-content: center;
 }
