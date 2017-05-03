@@ -6,7 +6,7 @@ export class ExerciseRecord extends EntityRecord<ExerciseItem> {
     constructor(
             public entityId: number,
             public minutes: number,
-            recorded?: Date) {
+            recorded: Date) {
 
         super(entityId, recorded);
     }

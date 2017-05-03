@@ -22,7 +22,7 @@
     <div class="cell"><p>No records found :(</p></div>
   </div>
 
-  <div class="row" *ngFor="let record of records | async" (click)="rowClicked(record)">
+  <div class="row" *ngFor="let record of records | async | slice : sliceStart : sliceEnd" (click)="rowClicked(record)">
     <div class="cell" *ngFor="let column of columns" [style.flexBasis]="column.preferredWidth">
       <p>{{ column.getValue(record) }}</p>
     </div>
@@ -41,6 +41,15 @@
       <span class="sr-only">Delete</span>
     </div>
   </div>
+
+  <div class="footer row">
+    <div class="cell">
+      <i class="fa fa-chevron-circle-left pager" [style.visibility]="currentPage > 1 ? 'visible' : 'hidden'" (click)="currentPage = currentPage - 1;"></i>
+      <p>Page {{ currentPage }} of {{ totalPages }}</p>
+      <i class="fa fa-chevron-circle-right pager" [style.visibility]="currentPage < totalPages ? 'visible' : 'hidden'" (click)="currentPage = currentPage + 1;"></i>
+    </div>
+  </div>
+
 </div>
 
 <div *ngIf="viewRecord">

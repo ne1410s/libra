@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 
-import { Column } from 'app/shared/table/table.component';
+import { Column, SortMode } from 'app/shared/table/table.component';
 import { MassRecord } from '../mass-record';
 import { MassRecordService } from '../mass-record.service';
 import { MassConverterPipe } from 'app/shared/pipes/mass-converter.pipe';
@@ -24,7 +24,7 @@ export class MassRecordListComponent extends DateListBase<MassRecord> {
       new Column('recorded', 'Recorded On', '33%', v => {
         const recorded = new Date(v);
         return recorded.toLocaleDateString() + ' @ ' + recorded.toLocaleTimeString();
-      }),
+      }, SortMode.Descending),
       new Column('kilos', 'Kg', '22%', v => this.massPipe.transform(v, 'kg')),
       new Column('kilos', 'Lb', '22%', v => this.massPipe.transform(v, 'lb')),
       new Column('kilos', 'St', '22%', v => this.massPipe.transform(v, 'st')),

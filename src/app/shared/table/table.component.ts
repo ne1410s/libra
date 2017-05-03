@@ -1,7 +1,6 @@
 import { Component, EventEmitter, Input, Output, OnInit } from '@angular/core';
 
 import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/operator/do';
 
 @Component({
   selector: 'app-table',
@@ -15,6 +14,7 @@ export class TableComponent implements OnInit {
   @Input() heading: string;
   @Input() maxWidth = '100%';
   @Input() showDelete = true;
+  @Input() pageSize = 5;
   @Output() onRowClicked = new EventEmitter<any>();
   @Output() onDeleteClicked = new EventEmitter<any>();
   @Output() onPopupClosed = new EventEmitter<any>();
@@ -24,9 +24,20 @@ export class TableComponent implements OnInit {
   newRecord: any;
 
   valueCheck: string;
+  currentPage = 1;
+  totalPages: number;
+
+  get sliceStart(): number {
+    return (this.currentPage - 1) * this.pageSize;
+  }
+
+  get sliceEnd(): number {
+    return this.sliceStart + this.pageSize;
+  }
 
   ngOnInit(): void {
-    this.records.do(records => {
+    this.records.subscribe(records => {
+      this.totalPages = Math.ceil(records.length / this.pageSize);
       if ((!this.columns || this.columns.length === 0) && records.length !== 0) {
         this.columns = Object.keys(records[0]).map(k => new Column(k));
       }
@@ -65,6 +76,10 @@ export class TableComponent implements OnInit {
     this.onPopupClosed.emit(this.viewRecord);
     this.viewRecord = null;
     this.valueCheck = null;
+
+    this.records.subscribe(records => {
+      this.totalPages = Math.ceil(records.length / this.pageSize);
+    });
   }
 }
 
@@ -91,8 +106,12 @@ export class Column {
       case SortMode.Ascending:
         this.sortMode = SortMode.Descending;
         break;
-      default:
+      case SortMode.Descending:
         this.sortMode = SortMode.Ascending;
+        break;
+      case SortMode.None:
+        this.sortMode = this.initialSort;
+        break;
     }
 
     records.sort((a, b) => a[this.objectKey] < b[this.objectKey] ? -1 : a[this.objectKey] > b[this.objectKey] ? 1 : 0);
@@ -104,5 +123,6 @@ export class Column {
     public objectKey: string,
     public displayName?: string,
     public preferredWidth = '25%',
-    public valueCallback?: (val: any, obj: any) => any) {}
+    public valueCallback?: (val: any, obj: any) => any,
+    public initialSort = SortMode.Ascending) {}
 }

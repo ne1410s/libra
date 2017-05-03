@@ -6,7 +6,7 @@ export class FoodRecord extends EntityRecord<FoodItem> {
     constructor(
             public entityId: number,
             public grams: number,
-            recorded?: Date) {
+            recorded: Date) {
 
         super(entityId, recorded);
     }

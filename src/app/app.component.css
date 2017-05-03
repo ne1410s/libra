@@ -55,5 +55,6 @@ footer {
 }
 
 section.content {
-    min-height: calc(100vh - 130px);
+    min-height: calc(100vh - 166px);
+    padding: 1em 0;
 }

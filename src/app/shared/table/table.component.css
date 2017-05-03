@@ -1,28 +1,28 @@
 h4 {
     text-align: center;
-    padding: 2em 0;
+    padding: 1em 0;
 }
 
 .table {
     border: 1px solid #ddd;
-    margin: auto;
+    margin: 0 auto 1em;
 }
 
 .row {
     display: flex;
 }
 
-.row:not(.header):nth-child(2n + 1) {
+.row:not(.header):not(.footer):nth-child(2n + 1) {
     color: #333;
     background-color: #fff;
 }
 
-.row:not(.header):hover {
+.row:not(.header):not(.footer):hover {
     color: #fff;
     background-color: rgba(0, 70, 0, .6);
 }
 
-.header.row {
+.header.row, .footer.row {
     font-weight: bold;
     text-align: center;
     background-color: #777;
@@ -44,6 +44,16 @@ h4 {
     right: .5em;
     top: 50%;
     transform: translateY(-50%);
+}
+
+.footer.row > .cell {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.footer .pager {
+    cursor: pointer;
 }
 
 .row:not(.header) > .cell:not(:first-of-type) {

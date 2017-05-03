@@ -9,7 +9,7 @@ export abstract class EntityRecord<T extends Record> extends DateRecord {
 
     constructor(
             public entityId: number,
-            recorded?: Date) {
+            recorded: Date) {
 
         super(recorded);
     }
