@@ -38,6 +38,7 @@ export class MockDataService implements InMemoryDbService {
       new MassRecord(95.9, new Date(2017, 4, 7, 10, 0)),
       new MassRecord(97.7, new Date(2017, 4, 22, 18, 0)),
       new MassRecord(97.0, new Date(2017, 5, 7, 9, 0)),
+      new MassRecord(93.0, new Date(2017, 5, 12, 8, 0)),
     ];
 
     MockDataService.applyIncrementalIds(exercises);

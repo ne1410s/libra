@@ -4,6 +4,8 @@ import { HttpModule, XHRBackend, BrowserXhr, ResponseOptions, XSRFStrategy } fro
 import { InMemoryBackendService } from 'angular-in-memory-web-api';
 import { MockDataService } from './mock-data.service';
 
+import { environment } from 'environments/environment';
+
 @NgModule({
   imports: [ HttpModule ],
   providers: [
@@ -22,6 +24,7 @@ export function getBackEnd(
     xsrf: XSRFStrategy,
     options: ResponseOptions): any {
 
-  // return new XHRBackend(browser, options, xsrf);
-  return new InMemoryBackendService(injector, new MockDataService(), {});
+  return environment.production
+      ? new XHRBackend(browser, options, xsrf)
+      : new InMemoryBackendService(injector, new MockDataService(), {});
 }

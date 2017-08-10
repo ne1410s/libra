@@ -9,13 +9,15 @@ import 'rxjs/add/observable/throw';
 import { Record } from './record';
 import { QSQuery } from '../http/query-string.service';
 
+import { environment } from 'environments/environment';
+
 @Injectable()
 export abstract class CrudService<T extends Record> {
 
   private hackedIncrementId = 1000;
+  private apiBase = environment.libraApiBase;
 
   protected abstract apiEntityPath: string;
-  protected apiBase = 'api';
   protected headers = new Headers({'Content-Type': 'application/json'});
 
   public static handleError(error: any): Observable<any> {
