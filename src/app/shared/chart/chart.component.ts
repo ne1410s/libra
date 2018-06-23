@@ -20,7 +20,7 @@ import { ChartConfigService } from './chart-config.service';
 export class ChartComponent implements OnInit {
 
   public offset = 0;
-  public period = Period.Year;
+  public period = Period.Month;
   public yMin = 100;
   public yMax = 100;
 
